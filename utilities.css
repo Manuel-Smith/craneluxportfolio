@@ -100,6 +100,12 @@
   align-items: center;
 }
 
+.header-holder .menu ul li a:hover {
+  color: rgb(180, 23, 70);
+  border-bottom: 1px rgb(180, 23, 70) dashed;
+  transition: ease-in-out 300ms;
+}
+
 main .hero-section {
   display: grid;
   gap: 2.5rem;
