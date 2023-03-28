@@ -30,7 +30,14 @@ header {
 body {
   margin: 0;
   width: 100vw;
-  background: var(--color-primary);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 247, 255, 0.10),
+    rgba(0, 30, 128, 0.10),
+    rgba(115, 128, 0, 0.10),
+    rgba(0, 30, 128, 0.10),
+    rgba(0, 247, 255, 0.10)
+  );
   overflow-x: hidden;
 }
 
