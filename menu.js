@@ -34,6 +34,4 @@
       }, timeDisplay);
     }
   });
-
-  console.log(menuBars[1]);
 })();
