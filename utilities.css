@@ -18,6 +18,16 @@
   min-height: 60px;
   max-width: 60px;
 }
+
+.icon-frame span {
+  position: relative;
+  top: 10px;
+  display: flex;
+  margin: 0 auto;
+  font-size: 2.5rem;
+  justify-content: center;
+  align-content: center;
+}
 .header-holder {
   position: relative;
   display: flex;
@@ -57,6 +67,7 @@ main .tab-div div a {
 
 .header-holder .mini-menu .active,
 main .tab-div div a {
+  transition: 500ms ease-in-out;
   box-shadow: 0px 2px 20px 1px var(--color-shadows);
 }
 
@@ -168,6 +179,8 @@ main .hero-section .brief-me p a {
 
 main .tab-div {
   position: relative;
+  border: 1px dashed rgba(0, 0, 255, 0.432);
+  height: 70vh;
 }
 
 main .tab-div > div {
@@ -179,15 +192,25 @@ main .tab-div > div {
   opacity: 0;
   z-index: 1;
 }
+main .resource-tracker {
+  position: relative;
+ background: #8687f6;
+ right: 33px;
+ top: 60.5px;
+ left: 33%; 
+ height: 20px;
+ width: 34%;
+ transition: 400ms ease-in-out;
+}
 
 main .tab-div > div.active {
   z-index: 2;
   opacity: 1;
-  transition: top 500ms ease-in-out, opacity 500ms ease-in-out 0ms;
+  transition: 700ms ease-in-out;
 }
 
 main .tab-div div a {
-  padding: 1rem 2rem;
+  margin: 5rem 0 0 0;
   font-size: 1.4rem;
   color: white;
   background: rgba(0, 0, 255, 0.432);

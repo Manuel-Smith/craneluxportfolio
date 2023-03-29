@@ -2,10 +2,17 @@
   let menuIcon = document.getElementById("menu-item");
   let dropDownMenu = document.querySelector(".menu");
   let menuBars = [...document.querySelector(".menu-item").children];
+  let tabButtons = [...document.querySelectorAll(".tab-buttons")];
+  console.log(tabButtons);
 
   let menuClicked = false;
   let timeDisplay = 200;
 
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      location.href = "#";
+    });
+  });
   menuIcon.addEventListener("click", (e) => {
     if (menuClicked) {
       menuClicked = false;
