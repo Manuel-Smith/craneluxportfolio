@@ -23,12 +23,14 @@
     <header>
       <div class="margin-sides header-holder">
         <div class="icon-frame">
-          <img class="logo" src="./images/logo.png" alt="logo" />
+          <a href="/">
+            <img class="logo" src="./images/logo.png" alt="logo" width="60px"
+          /></a>
         </div>
         <div class="mini-menu">
-          <button id="but2" class="but2">LinkedIn</button>
-          <button id="but3" class="but3">Resume</button>
-          <button id="but1" class="but1">GitHub</button>
+          <button class="tab-buttons">LinkedIn</button>
+          <button class="tab-buttons active">Resume</button>
+          <button class="tab-buttons">GitHub</button>
         </div>
         <div id="menu-item" class="icon-frame menu-item">
           <div class="bars bar-tilt"></div>
@@ -39,13 +41,13 @@
           <ul>
             <li>
               <span class="material-symbols-outlined"> home </span>
-              <a href="#">Home</a>
+              <a href="/">Home</a>
             </li>
             <li>
               <span class="material-symbols-outlined">
                 supervised_user_circle
               </span>
-              <a href="#">About</a>
+              <a href="/about.html">About</a>
             </li>
           </ul>
         </div>
@@ -64,6 +66,28 @@
             not only write, but also code and hack things. <br />Learn more
             <a href="#">about me</a>.
           </p>
+        </div>
+        <div class="tab-div">
+          <div>
+            <a href="https://www.linkedin.com/in/manuel-smith">Let's Connect</a>
+            <img
+              src="./images/linkedin-profile.png"
+              alt="linkedin profile image"
+            />
+            <div class="overlay"></div>
+          </div>
+          <div class="active">
+            <a href="./resources/Manuels-resume.pdf" download id="resumeBtn"
+              >Collect My Resume</a
+            >
+            <img src="./images/my-resume.png" alt="Manuel's resume" />
+            <div class="overlay"></div>
+          </div>
+          <div>
+            <a href="https://github.com/Manuel-Smith">Follow Me</a>
+            <img src="./images/code-spaces.png" alt="github profile" />
+            <div class="overlay"></div>
+          </div>
         </div>
       </div>
       <div class="resources-links"></div>

@@ -1,32 +1,39 @@
 (() => {
-  let gitHubTab = document.getElementById("but1");
-  let linkedinTab = document.getElementById("but2");
-  let resumeTab = document.getElementById("but3");
-  let shadowColor = "#33333357";
-  let delayTime = "150";
+  let tabButtons = [...document.querySelectorAll(".tab-buttons")];
+  let resources = [...document.querySelectorAll("main .tab-div > div")];
+  console.log(resources);
 
-  gitHubTab.addEventListener("click", (event) => {
-    setTimeout(() => {
-      event.target.style.boxShadow = `0px 2px 20px 1px ${shadowColor}`;
-      event.target.style.transition = "ease-in 300ms";
-      resumeTab.style.boxShadow = "none";
-      linkedinTab.style.boxShadow = "none";
-    }, delayTime);
+  tabButtons[0].addEventListener("click", () => {
+    // Conditions for toggling button one
+    tabButtons[0].classList.add("active");
+    tabButtons[1].classList.remove("active");
+    tabButtons[2].classList.remove("active");
+
+    //Conditions for toggling hero section objects one
+    resources[0].classList.add("active");
+    resources[1].classList.remove("active");
+    resources[2].classList.remove("active");
   });
-  linkedinTab.addEventListener("click", (event) => {
-    setTimeout(() => {
-      event.target.style.boxShadow = `0px 2px 20px 1px ${shadowColor}`;
-      event.target.style.transition = "ease-in 300ms";
-      resumeTab.style.boxShadow = "none";
-      gitHubTab.style.boxShadow = "none";
-    }, delayTime);
+  tabButtons[1].addEventListener("click", () => {
+    // Conditions for toggling button two
+    tabButtons[1].classList.add("active");
+    tabButtons[0].classList.remove("active");
+    tabButtons[2].classList.remove("active");
+
+    //Conditions for toggling hero section objects one
+    resources[1].classList.add("active");
+    resources[0].classList.remove("active");
+    resources[2].classList.remove("active");
   });
-  resumeTab.addEventListener("click", (event) => {
-    setTimeout(() => {
-      event.target.style.boxShadow = `0px 2px 20px 1px ${shadowColor}`;
-      event.target.style.transition = "ease-in 300ms";
-      gitHubTab.style.boxShadow = "none";
-      linkedinTab.style.boxShadow = "none";
-    }, delayTime);
+  tabButtons[2].addEventListener("click", () => {
+    // Conditions for toggling button one
+    tabButtons[2].classList.add("active");
+    tabButtons[0].classList.remove("active");
+    tabButtons[1].classList.remove("active");
+
+    //Conditions for toggling hero section objects one
+    resources[2].classList.add("active");
+    resources[0].classList.remove("active");
+    resources[1].classList.remove("active");
   });
 })();

@@ -16,6 +16,7 @@
   width: 100%;
   min-width: 60px;
   min-height: 60px;
+  max-width: 60px;
 }
 .header-holder {
   position: relative;
@@ -34,7 +35,8 @@
   display: flex;
   gap: 1rem;
 } */
-.header-holder .mini-menu {
+.header-holder .mini-menu,
+main .tab-div div a {
   position: relative;
   background-color: var(--color-primary);
   padding: 1rem;
@@ -53,7 +55,8 @@
   /* box-shadow: 0px 2px 20px 1px var(--color-shadows); */
 }
 
-.header-holder .mini-menu #but3 {
+.header-holder .mini-menu .active,
+main .tab-div div a {
   box-shadow: 0px 2px 20px 1px var(--color-shadows);
 }
 
@@ -161,4 +164,42 @@ main .hero-section .brief-me p {
 main .hero-section .brief-me p a {
   color: rgb(180, 23, 70);
   border-bottom: 1px rgb(180, 23, 70) dashed;
+}
+
+main .tab-div {
+  position: relative;
+}
+
+main .tab-div > div {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0;
+  z-index: 1;
+}
+
+main .tab-div > div.active {
+  z-index: 2;
+  opacity: 1;
+  transition: top 500ms ease-in-out, opacity 500ms ease-in-out 0ms;
+}
+
+main .tab-div div a {
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  color: white;
+  background: rgba(0, 0, 255, 0.432);
+}
+
+main .tab-div div a:hover {
+  transition: 300ms ease-in-out;
+  background-color: transparent;
+  color: var(--color-bars);
+}
+
+main .tab-div div img {
+  width: 85%;
+  border-radius: 20px;
 }
