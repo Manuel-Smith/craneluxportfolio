@@ -28,6 +28,11 @@
   justify-content: center;
   align-content: center;
 }
+
+.icon-frame span:hover{
+  color: rgba(107, 14, 14, 0.658);
+  transition: ease-in-out 200ms;
+}
 .header-holder {
   position: relative;
   display: flex;
@@ -180,7 +185,7 @@ main .hero-section .brief-me p a {
 main .tab-div {
   position: relative;
   border: 1px dashed rgba(0, 0, 255, 0.432);
-  height: 70vh;
+  height: 50rem;
 }
 
 main .tab-div > div {
@@ -196,10 +201,11 @@ main .resource-tracker {
   position: relative;
  background: #8687f6;
  right: 33px;
- top: 60.5px;
+ top: 40px;
  left: 33%; 
- height: 20px;
+ height: 10px;
  width: 34%;
+ border-radius: 10px 10px 0 0;
  transition: 400ms ease-in-out;
 }
 
