@@ -168,7 +168,8 @@ main .hero-section .brief-me p {
   line-height: 1.5;
 }
 
-main .hero-section .brief-me p a {
+main .hero-section .brief-me p a,
+footer p a {
   color: rgb(180, 23, 70);
   border-bottom: 1px rgb(180, 23, 70) dashed;
 }
@@ -223,10 +224,11 @@ main .tab-div div a {
   background: rgba(0, 0, 255, 0.432);
 }
 
-main .tab-div div a:hover {
+main .tab-div div a:hover,
+.resources-links .resources .resource-copy button:hover {
   transition: 300ms ease-in-out;
   background-color: transparent;
-  color: var(--color-bars);
+  color: var(--color-dark-brown);
 }
 
 main .tab-div div img {
@@ -236,7 +238,8 @@ main .tab-div div img {
 }
 
 .portfolio-section{
-  
+  padding: 2rem;
+  background-color: white;
 }
 .resources-links{
   position: relative;
@@ -268,8 +271,15 @@ main .tab-div div img {
   width: 50%;
 }
 
+.resources-links .resources .resource-image{
+position: relative;
+}
+
 .resources-links .resources .resource-image img{
+  position: absolute;
+  top: 10%;
   width: 90%;
+  height: 80%;
   border-radius: 10px;
 }
 
@@ -302,8 +312,17 @@ main .tab-div div img {
   box-shadow: var(--all-shadows);
 }
 
-.resources-links .resources .resource-copy button:hover{
-  background-color: transparent;
-  transition: 300ms ease-in-out;
-  color: var(--color-dark-brown);
+footer h1{
+  text-align: center;
+  font-size: 2.5rem;
+  line-height: 3;
+}
+footer p{
+  line-height: 2;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+footer p > span{
+  color: rgb(180, 23, 70);
 }

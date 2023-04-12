@@ -47,13 +47,21 @@ body {
     rgba(0, 30, 128, 0.1),
     rgba(238, 230, 155, 0.2),
     rgba(0, 30, 128, 0.1),
-    rgba(238, 230, 155, 0.2) 
+    rgba(238, 230, 155, 0.2)
   );
   overflow-x: hidden;
 }
 
 footer {
-  background-color: forestgreen;
+  position: relative;
+  top: 30rem;
+  padding-bottom: 4rem;
+  margin-left: 0;
+}
+
+footer h1 {
+  color: var(--color-dark-brown);
+  font-size: 3rem;
 }
 
 a {
