@@ -3,7 +3,6 @@
 ::before,
 * {
   font-family: "Lato", sans-serif;
-  padding: 10;
   margin: 0;
   box-sizing: border-box;
   --color-primary: #f6f6f6;

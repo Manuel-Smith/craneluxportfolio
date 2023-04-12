@@ -225,7 +225,7 @@ main .tab-div div a {
 }
 
 main .tab-div div a:hover,
-.resources-links .resources .resource-copy button:hover {
+.resources-links .resources .resource-copy a:hover {
   transition: 300ms ease-in-out;
   background-color: transparent;
   color: var(--color-dark-brown);
@@ -279,7 +279,6 @@ position: relative;
   position: absolute;
   top: 10%;
   width: 90%;
-  height: 80%;
   border-radius: 10px;
 }
 
@@ -293,7 +292,9 @@ position: relative;
   margin: 1rem 0;
   line-height: 1.4;
 }
-
+.resources-links .resources .resource-copy ul{
+  padding: 0.5rem;
+}
 .resources-links .resources .resource-copy ul li{
   padding: 0.2rem 0;
   display: flex;
@@ -301,12 +302,15 @@ position: relative;
   gap: 1.5rem;
 }
 
-.resources-links .resources .resource-copy button {
-  border: none;
-  outline: none;
-  margin-top: 2rem;
+.resources-links .resources .resource-copy ul li span {
+  color: rgb(139, 3, 44);
+}
+
+.resources-links .resources .resource-copy a {
+  position: relative;
+  top: 2rem;
   background-color: #8687f6;
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: 5px;
   color: var(--color-primary);
   box-shadow: var(--all-shadows);
