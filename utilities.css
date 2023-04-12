@@ -29,7 +29,7 @@
   align-content: center;
 }
 
-.icon-frame span:hover{
+.icon-frame span:hover {
   color: rgba(107, 14, 14, 0.658);
   transition: ease-in-out 200ms;
 }
@@ -41,15 +41,6 @@
   padding: 3rem 1rem;
 }
 
-/*Styling the Sections with .header-holder buttons*/
-/* .header-holder .mini-menu {
-  position: relative;
-  background-color: var(--color-primary);
-  padding: 1rem;
-  border-radius: 1.5rem;
-  display: flex;
-  gap: 1rem;
-} */
 .header-holder .mini-menu,
 main .tab-div div a {
   position: relative;
@@ -184,12 +175,21 @@ main .hero-section .brief-me p a {
 
 main .tab-div {
   position: relative;
-  border: 1px dashed rgba(0, 0, 255, 0.432);
-  height: 50rem;
+  /* border: 1px dashed rgba(0, 0, 255, 0.432); */
+  border-radius: 0px 0px 20px 20px;
+  height: 30rem;
+  box-shadow: var(--all-shadows);
+  background-color: #eceff1;
+}
+
+main .tab-div:hover {
+  background-color: transparent;
+  transition: all 300ms;
 }
 
 main .tab-div > div {
   position: absolute;
+  /* box-shadow: var(--all-shadows); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,25 +199,26 @@ main .tab-div > div {
 }
 main .resource-tracker {
   position: relative;
- background: #8687f6;
- right: 33px;
- top: 40px;
- left: 33%; 
- height: 10px;
- width: 34%;
- border-radius: 10px 10px 0 0;
- transition: 400ms ease-in-out;
+  background: #8687f6;
+  right: 33px;
+  top: 40px;
+  left: 33%;
+  height: 10px;
+  width: 34%;
+  border-radius: 10px 10px 0 0;
+  transition: 400ms ease-in-out;
 }
 
 main .tab-div > div.active {
   z-index: 2;
   opacity: 1;
+  box-shadow: var(--all-shadows);
   transition: 700ms ease-in-out;
 }
 
 main .tab-div div a {
-  margin: 5rem 0 0 0;
-  font-size: 1.4rem;
+  margin: 2rem 0 0 0;
+  font-size: 1.2rem;
   color: white;
   background: rgba(0, 0, 255, 0.432);
 }
@@ -230,5 +231,6 @@ main .tab-div div a:hover {
 
 main .tab-div div img {
   width: 85%;
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0;
+  box-shadow: var(--all-shadows);
 }
