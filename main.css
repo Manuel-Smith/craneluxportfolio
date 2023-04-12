@@ -11,6 +11,7 @@
   --color-bars: #333;
   --color-shadows: #33333357;
   --all-shadows: 0px 2px 20px 1px var(--color-shadows);
+  --color-dark-brown: rgba(53, 1, 1, 0.658);
   /* transition: ease; */
 
   color: var(--color-bars);
@@ -28,7 +29,7 @@ li {
 header {
   position: fixed;
   width: 100vw;
-  z-index: 1;
+  z-index: 3;
 }
 
 body {
