@@ -234,3 +234,32 @@ main .tab-div div img {
   border-radius: 20px 20px 0 0;
   box-shadow: var(--all-shadows);
 }
+
+.resources-links{
+  position: relative;
+  top: 15rem;
+  display: grid;
+  gap: 10rem;
+}
+
+.resources-links .resources {
+  display: flex;
+  background-color: #eceff1;
+  border-radius: 20px;
+  padding: 5rem 1rem;
+  box-shadow: var(--all-shadows);
+}
+
+.resources-links .resources:hover{
+  transition: 500ms ease-in-out;
+  box-shadow: none;
+}
+
+.resources-links .resources > div{
+  width: 50%;
+}
+
+.resources-links .resources .resource-image img{
+  width: 90%;
+  border-radius: 10px;
+}
