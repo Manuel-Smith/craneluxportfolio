@@ -6,11 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Installation Guide</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="image/png" href="../images/logo.png" />
+    <link rel="stylesheet" href="../utilities.css">
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  />
 </head>
 <body>
-    <header></header>
+    <header>
+        <div class="margin-sides header-holder">
+          <div class="icon-frame">
+            <a href="/">
+              <span class="material-symbols-outlined"> keyboard_backspace </span>
+            </a>
+          </div>
+  
+          <div id="menu-item" class="icon-frame menu-item">
+            <div class="bars bar-tilt"></div>
+            <div class="bars bar-none"></div>
+            <div class="bars bar-tilt"></div>
+          </div>
+          <div class="menu">
+            <ul>
+              <li>
+                <span class="material-symbols-outlined"> home </span>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">
+                  supervised_user_circle
+                </span>
+                <a href="/about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="hero-section">
+        <div class="overlay">
+            <div>
+                <h1>HAproxy Load Balancing Configurations</h1>
+            </div>
+            <div>
+                <p>April 13, 2023 <span>Networking | Load Balancing</span></p>
+            </div>
+        </div>
+      </div>
     <main>
-        <p>Smoothwall is an open source Linux based Firewall designed to protect networks from malicious traffic and unauthorized access. Some features shipped with Smoothwall include;</p>
+        <p>Smoothwall is an open source Linux based Firewall designed to protect networks from malicious traffic and unauthorized access. Some features shipped with Smoothwall include;<br><br></p>
         <ol>
             <li>Outbound and inbound web content filtering.</li>
             <li>Support for LAN, DMZ, and wireless networks.</li>
@@ -18,121 +62,127 @@
             <li>Virtual Private Network.</li>
             <li>Portforwardinding, etc.</li>
         </ol>
-        <p>In this guide, we discuss how to install Smoothwall Express in Oracle VirtualBox. </p>
+        <p><br><br>In this guide, we discuss how to install Smoothwall Express in <a href="https://www.virtualbox.org/" target="_blank">Oracle VirtualBox</a>. </p>
 
         <h1>Downloading the ISO file</h1>
-        <p>One may download the ISO from SourceForge. Click here to download. For this guide, select the iso file Express-3.1-x86064.iso from the provided list.</p>
+        <p>One may download the ISO from SourceForge. Click <a href="https://smoothwall.org/download.html" target="_blank">here</a> to download. For this guide, select the iso file <strong>Express-3.1-x86064.iso</strong> from the provided list.</p>
         <h1>Setup In VirtualBox</h1>
-        <p>In your VirtualBox application:</p>
+        <p>In your VirtualBox application: <br><br></p>
         <ol>
-            <li>Click “New”. A dialog box will appear.</li>
-            <li>Enter a Name to identify the Smoothwall Virtual machine.</li>
-            <li>Select a Folder to store smoothwall configuration settings.</li>
-            <li>Select the smoothwall ISO Image from the download directory.</li>
+            <li>Click <strong>New</strong>. A dialog box will appear.</li>
+            <li>Enter a <strong>Name</strong> to identify the Smoothwall Virtual machine.</li>
+            <li>Select a <strong>Folder</strong> to store smoothwall configuration settings.</li>
+            <li>Select the smoothwall <strong>ISO Image</strong> from the download directory.</li>
             <img src="./installation-images/smoothwall1.PNG" alt="">
-            <li>Click “Next”.</li>
-            <li>Allocate a Base Memory of at least 2048 MB and 2 CPU cores.</li>
+            <li>Click <strong>Next</strong>.</li>
+            <li>Allocate a <strong>Base Memory</strong> of at least 2048 MB and 2 CPU cores.</li>
             <img src="./installation-images/smoothwall2.PNG" alt="">
-            <li>Click "Next".</li>
-            <li>Select the default Virtual Hard disk setting as “Create a Virtual Hard Disk Now.”</li>
+            <li>Click <strong>Next</strong>.</li>
+            <li>Select the default Virtual Hard disk setting as <strong>Create a Virtual Hard Disk Now</strong>.</li>
             <img src="installation-images/smoothwall3.PNG" alt="">
-            <li>Click "Next."</li>
-            <li>Confirm the Summary of your settings.</li>
+            <li>Click <strong>Next</strong>.</li>
+            <li>Confirm the <strong>Summary</strong> of your settings.</li>
             <img src="./installation-images/smoothwall4.PNG" alt="">
-            <li>Click "Finish".</li>
+            <li>Click <strong>Finish</strong>.</li>
         </ol>
 
         <h1>VirtualBox Network Configurations</h1>
-        <p>Smoothwall will only work if at least 2 Network adapters are in Bridged mode.</p>
+        <p>Smoothwall will only work if at least 2 Network adapters are in Bridged mode. <br><br></p>
         <ol>
-            <li>With the smoothwall instance selected, click the "settings" button.</li>
-            <li>Click the "Network" tab.</li>
-            <li>For Adapter 1, Enable the Network Adapter by clicking the "check box".</li>
-            <li>Select the adapter as a "Bridged Adapter".</li>
+            <li>With the smoothwall instance selected, click the <strong>settings</strong> button.</li>
+            <li>Click the <strong>Network</strong> tab.</li>
+            <li>For Adapter 1, Enable the Network Adapter by clicking the <strong>check box</strong>.</li>
+            <li>Select the adapter as a <strong>Bridged Adapter</strong>.</li>
             <img src="./installation-images/smoothwall6.PNG" alt="">
-            <li>Repeat this setting for "Adapter 2".</li>
-            <li>Click "OK".</li>
+            <li>Repeat this setting for <strong>Adapter 2</strong>.</li>
+            <li>Click <strong>OK</strong>.</li>
         </ol>
         <h1>Installation</h1>
-        <p>With the smoothwall instance selected:</p>
+        <p>With the smoothwall instance selected: <br><br></p>
         <ol>
-            <li>Click the start button to start the installation. A new window instance will appear.</li>
-            <li>Select the Boot Option, “Install Smoothwall Express”.</li>
+            <li>Click the <strong>Start</strong> button to start the installation. A new window instance will appear.</li>
+            <li>Select the Boot Option, <strong>Install Smoothwall Express</strong>.</li>
             <img src="./installation-images/smoothwall7.PNG" alt="">
-            <li>Press "OK" for the next 3 dialog windows.</li>
+            <li>Press <strong>OK</strong> for the next 3 dialog windows.</li>
             <img src="./installation-images/smoothwall8.PNG" alt="">
             <img src="./installation-images/smoothwall9.PNG" alt="">
             <img src="./installation-images/smoothwall10.PNG" alt="">
-            <li>Virtualbox will partition your hard drive afterward. Click "OK" after getting a congratulations message.</li>
+            <li>Virtualbox will partition your hard drive afterward. Click <strong>OK</strong> after getting a congratulations message.</li>
             <img src="./installation-images/smoothwall11.PNG" alt="">
-            <li>Smoothwall will ask if you want to restore the configuration from a previous installation. Select "No."</li>
-            <li>Select Keyboard mappings as "ua-ws [qwerty]."</li>
-            <li>Select the "Timezone" you are in from the provided list.</li>
-            <li>Enter a "hostname" for your machine and press "OK."</li>
-            <li>Select the "Default security policy" as Open and press "OK."</li>
+            <li>Smoothwall will ask if you want to restore the configuration from a previous installation. Select <strong>No</strong>.</li>
+            <li>Select Keyboard mappings as <strong>ua-ws [qwerty]</strong>.</li>
+            <li>Select the <strong>Timezone</strong> you are in from the provided list.</li>
+            <li>Enter a <strong>hostname</strong> for your machine and press <strong>OK</strong>.</li>
+            <li>Select the <strong>Default security policy</strong> as Open and press <strong>OK</strong>.</li>
         </ol>
 
         <h2>Network Configurations</h2>
         <h3>Network configuration type</h3>
         <ol>
-            <li>Change the Network configuration type to Green + Red.</li>
+            <li>Change the Network configuration type to <strong>Green + Red</strong>.</li>
         </ol>
 
         <h3>Card assignments</h3>
-        <p>In this section, we assign network cards to the Green and Red Interfaces.</p>
+        <p>In this section, we assign network cards to the Green and Red Interfaces. <br><br></p>
         <ol>
-            <li>Start with Green and press “OK”.</li>
-            <li>Then Red and press “OK”. You’ll get a message. “All cards successfully allocated.”</li>
+            <li>Start with Green and press <strong>OK</strong>.</li>
+            <li>Then Red and press <strong>OK</strong>. You’ll get a message. <strong>All cards successfully allocated.</strong></li>
             <img src="./installation-images/smoothwall14.PNG" alt="">
-            <li>Press “OK”.</li>
+            <li>Press <strong>OK</strong>.</li>
         </ol>
         <h3>Address settings</h3>
-        <p>In this section, we add IP addresses to the Green and Red Interfaces.</p>
+        <p>In this section, we add IP addresses to the Green and Red Interfaces. <br><br></p>
         <ol>
-            <li>Select “Green”.</li>
-            <li>Press “OK” on the dialog box with a warning shows up.</li>
-            <li>Enter the “IP address” for the Green Interface and its “Network Mask”.</li>
+            <li>Select <strong>Green</strong>.</li>
+            <li>Press <strong>OK</strong> on the dialog box with a warning shows up.</li>
+            <li>Enter the <strong>IP address</strong> for the Green Interface and its <strong>Network Mask</strong>.</li>
             <img src="./installation-images/smoothwall15.PNG" alt="">
-            <li>Press “OK” to proceed.</li>
-            <li>Change the address settings for the RED Interface by selecting “DHCP”.</li>
+            <li>Press <strong>OK</strong> to proceed.</li>
+            <li>Change the address settings for the RED Interface by selecting <strong>DHCP</strong>.</li>
             <img src="./installation-images/smoothwall16.PNG" alt="">
-            <li>Press “OK” to proceed.</li>
-            <li>In the “Address settings” section, Press “Done”.</li>
+            <li>Press <strong>OK</strong> to proceed.</li>
+            <li>In the <strong>Address settings</strong> section, Press <strong>Done</strong>.</li>
         </ol>
         <h3>DNS and Gateway settings</h3>
-        <p>In this section, we configure DNS and Gateway settings for the firewall.</p>
+        <p>In this section, we configure DNS and Gateway settings for the firewall. <br><br></p>
         <ol>
-            <li>Add the Ip address for the “primary DNS” in IPV4 format.</li>
-            <li>Add the IP address for the “secondary DNS” in ipv4 format.</li>
-            <li>Enter the IP address of your router as the “Default Gateway”.</li>
+            <li>Add the Ip address for the <strong>primary DNS</strong> in IPV4 format.</li>
+            <li>Add the IP address for the <strong>secondary DNS</strong> in ipv4 format.</li>
+            <li>Enter the IP address of your router as the <strong>Default Gateway</strong>.</li>
             <img src="./installation-images/smoothwall17.PNG" alt="">
-            <li>Within the Network configuration menu section, press “Done”.</li>
-            <li>Within the selection menu section, press “Finished”.</li>
+            <li>Within the Network configuration menu section, press <strong>Done</strong>.</li>
+            <li>Within the selection menu section, press <strong>Finished</strong>.</li>
         </ol>
 
         <h1>Web Admin and root password</h1>
         <h2>Web admin password</h2>
         <ol>
-            <li>Enter a new admin password for the web interface. The password to use when logging into web admin pages.</li>
-            <li>Confirm the password by entering it in the Again field.</li>
+            <li>Enter a new <strong>admin</strong> password for the web interface. The password to use when logging into web admin pages.</li>
+            <li>Confirm the password by entering it in the <strong>Again</strong> field.</li>
             <img src="./installation-images/smoothwall18.PNG" alt="">
-            <li>Press “OK”.</li>
+            <li>Press <strong>OK</strong>.</li>
         </ol>
         <h2>Root</h2>
         <ol>
-            <li>Enter a new root user “password”. One to use for the command line access.</li>
+            <li>Enter a new root user <strong>password</strong>. One to use for the command line access.</li>
             <li>Confirm the password by entering it in the Again field.</li>
             <img src="./installation-images/smoothwall19.PNG" alt="">
-            <li>Press “OK”.</li>
+            <li>Press <strong>OK</strong>.</li>
         </ol>
 
-        <p>Congratulations! The setup is complete.<br><br></p>
+        <p><br><br>Congratulations! The setup is complete.<br><br></p>
         <img src="./installation-images/smoothwall20.PNG" alt="">
-        <p>Press “OK” to reboot.<br><br></p>
-        <p>After rebooting, access the firewall instance in the web browser using IP address “https://&lt;&lt;ip.addr&gt;&gt;:81”, For example, http://192.168.88.2:81</p>
+        <p>Press <strong>OK</strong> to reboot.<br><br></p>
+        <p>After rebooting, access the firewall instance in the web browser using IP address <strong>https://&lt;&lt;ip.addr&gt;&gt;:81</strong>, For example, <strong>http://192.168.88.2:81</strong></p>
         <img src="./installation-images/smoothwall21.PNG" alt="">
-        <p>The default “Username” is admin, and the password is one you set.</p>
+        <p>The default <strong>Username</strong> is <em><u>admin</u></em>, and the password is one you set.</p>
     </main>
-    <footer></footer>
+    <footer>
+        <h1>Manuel Smith</h1>
+        <p>Technical Writer and Node.Js Developer:  <span><a href="mailto:manuel@cranelux.com">manuel@cranelux.com</a></span></p>
+        <p><a href="#">Terms</a> | <a href="#">Privacy</a></p>
+        <p><a href="https://www.linkedin.com/in/manuel-smith/" target="_blank">Linkedin</a> | <a href="https://github.com/Manuel-Smith" target="_blank">GitHub</a> | <a href="https://www.codewars.com/users/Manuel-smith" target="_blank">CodeWars</a></p>
+      </footer>
+      <script src="../menu.js"></script>
 </body>
 </html>
