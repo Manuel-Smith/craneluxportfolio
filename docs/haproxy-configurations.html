@@ -1,101 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Load Balancing with HAproxy</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css" />
     <link rel="icon" type="image/png" href="../images/logo.png" />
-    <link rel="stylesheet" href="../utilities.css">
+    <link rel="stylesheet" href="../utilities.css" />
     <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-  />
-</head>
-<body>
-        <header>
-        <div class="margin-sides header-holder">
-          <div class="icon-frame">
-            <a href="/">
-              <span class="material-symbols-outlined"> keyboard_backspace </span>
-            </a>
-          </div>
-  
-          <div id="menu-item" class="icon-frame menu-item">
-            <div class="bars bar-tilt"></div>
-            <div class="bars bar-none"></div>
-            <div class="bars bar-tilt"></div>
-          </div>
-          <div class="menu">
-            <ul>
-              <li>
-                <span class="material-symbols-outlined"> home </span>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">
-                  supervised_user_circle
-                </span>
-                <a href="/about.html">About</a>
-              </li>
-            </ul>
-          </div>
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="margin-sides header-holder">
+        <div class="icon-frame">
+          <a href="/">
+            <span class="material-symbols-outlined"> keyboard_backspace </span>
+          </a>
         </div>
-      </header>
-            <div class="hero-section">
-        <div class="overlay">
-            <div>
-                <h1>How to Configure HAproxy For Load Balancing</h1>
-            </div>
-            <div>
-                <p>April 15, 2023 <span>Networking | Load Balancing</span></p>
-            </div>
+
+        <div id="menu-item" class="icon-frame menu-item">
+          <div class="bars bar-tilt"></div>
+          <div class="bars bar-none"></div>
+          <div class="bars bar-tilt"></div>
+        </div>
+        <div class="menu">
+          <ul>
+            <li>
+              <span class="material-symbols-outlined"> home </span>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <span class="material-symbols-outlined">
+                supervised_user_circle
+              </span>
+              <a href="/about.html">About</a>
+            </li>
+          </ul>
         </div>
       </div>
-    <main>
-        <h1>Introduction</h1>
-        <p>To relay inbound traffic across multiple <a href="https://www.igi-global.com/dictionary/the-analytic-hierarchy-process-as-a-method-for-the-selection-of-resources-in-the-cloud/97129" target="_blank">computing resources</a> such as servers, storage devices, or other network devices, we use Load balancers. <a href="https://www.ibm.com/topics/load-balancing" target="_blank">Load balancers</a> ensure we do not overwhelm resources with multiple traffic requests while others remain idle. This reduces the risk of system failure and improves scalability and overall response time.</p>
-        <p>HAproxy is one of the fastest and most cost-effective <a href="https://opensource.com/resources/what-open-source" target="_blank">open-source</a> load-balancing solutions. Primarily built in C, accounting for its speed and efficiency.</p>
-        <h1>Load balancing modes in HAproxy</h1>
-        <ol>
-            <li><p><a href="https://www.cloudflare.com/en-gb/learning/ddos/glossary/hypertext-transfer-protocol-http/" target="_blank">HTTP</a> - Performs content switching, SSL inspection, SSL termination, Session persistence, etc. This mode represents <a href="https://kemptechnologies.com/load-balancer/layer-7-load-balancing" target="_blank">Application layer load balancing</a>.</p></li>
-            <li><p><a href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol" target="_blank">TCP</a> - Relays traffic to backend servers in a fashion determined by a load-balancing algorithm. Works at layers 3 and 4 of the OSI model. This mode represents <a href="https://www.nginx.com/resources/glossary/layer-4-load-balancing/" target="_blank">Network layer load balancing</a>.</p></li>
-        </ol>
-
-        <h1>Farm design</h1>
-        <p>In this article, we describe how one may configure HAproxy to route traffic amongst 3 <a href="https://www.reference.com/world-view/back-end-server-d4d0f1b851cd7424" target="_blank">backend servers</a> in a server farm. These servers are; host1, host2, and host3.</p>
-        <p><em>Figure 1</em></p>
-        <img src="./installation-images/network-diagram.drawio.png" alt="">
-        <h1>Initial configurations</h1>
-        <p>HAproxy runs on most <a href="https://www.techtarget.com/searchdatacenter/definition/Linux-distros-Linux-distribution" target="_blank">Linux Distros</a>, FreeBSD, and Solaris. This guide assumes you use Ubuntu 20.0.4 LTS or any Debian-based Linux distro that uses apt as its <a href="https://itsfoss.com/package-manager/#:~:text=In%20simpler%20words%2C%20a%20package,like%20apt%2Dget%20or%20pacman." target="_blank">package manager</a>.</p>
-        <div class="notice">
-            <div class="side-margin"></div>
-            <p><strong>Important Notice!</strong></p>
-            <ol>
-                <li><p>Ensure you have admin privileges and you are the root user.</p></li>
-                <li><p>Reserve port 80 on your server for HAproxy to bind. Otherwise, this setup may not work.</p></li>
-            </ol>
-        </div>
-
-        <p>Check if HAproxy already exists using the command:</p>
-        <pre>root@ubuntu:~# haproxy -version</pre>
-        <p>If the command does not return a version number, HAproxy is not installed on your system. You must update your system and upgrade the necessary packages.To update and upgrade your system simultaneously, use the command:</p>
-        <pre>root@ubuntu:~# sudo apt update && apt upgrade</pre>
-        <p>Then install HAproxy using the command:</p>
-        <pre>root@ubuntu:~# apt install haproxy</pre>
-        <p>Congratulations. HAproxy is on your Ubuntu PC.</p>
+    </header>
+    <div class="hero-section">
+      <div class="overlay">
         <div>
-            <p>With the community edition, the default configuration file is in the file path:</p>
-            <pre>/etc/haproxy/haproxy.cfg</pre>
+          <h1>How to Configure HAproxy For Load Balancing</h1>
         </div>
-        <p>This configuration file has four sections; Global, Default, Frontend, and Backend. Instead of using the default configuration file, we will create a separate custom configuration.To create the configuration file in the root directory, use the command:</p>
+        <div>
+          <p>April 15, 2023 <span>Networking | Load Balancing</span></p>
+        </div>
+      </div>
+    </div>
+    <main>
+      <h1>Introduction</h1>
+      <p>
+        To relay inbound traffic across multiple
+        <a
+          href="https://www.igi-global.com/dictionary/the-analytic-hierarchy-process-as-a-method-for-the-selection-of-resources-in-the-cloud/97129"
+          target="_blank"
+          >computing resources</a
+        >
+        such as servers, storage devices, or other network devices, we use Load
+        balancers.
+        <a href="https://www.ibm.com/topics/load-balancing" target="_blank"
+          >Load balancers</a
+        >
+        ensure we do not overwhelm resources with multiple traffic requests
+        while others remain idle. This reduces the risk of system failure and
+        improves scalability and overall response time.
+      </p>
+      <p>
+        HAproxy is one of the fastest and most cost-effective
+        <a
+          href="https://opensource.com/resources/what-open-source"
+          target="_blank"
+          >open-source</a
+        >
+        load-balancing solutions. Primarily built in C, accounting for its speed
+        and efficiency.
+      </p>
+      <h1>Load balancing modes in HAproxy</h1>
+      <ol>
+        <li>
+          <p>
+            <a
+              href="https://www.cloudflare.com/en-gb/learning/ddos/glossary/hypertext-transfer-protocol-http/"
+              target="_blank"
+              >HTTP</a
+            >
+            - Performs content switching, SSL inspection, SSL termination,
+            Session persistence, etc. This mode represents
+            <a
+              href="https://kemptechnologies.com/load-balancer/layer-7-load-balancing"
+              target="_blank"
+              >Application layer load balancing</a
+            >.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol"
+              target="_blank"
+              >TCP</a
+            >
+            - Relays traffic to backend servers in a fashion determined by a
+            load-balancing algorithm. Works at layers 3 and 4 of the OSI model.
+            This mode represents
+            <a
+              href="https://www.nginx.com/resources/glossary/layer-4-load-balancing/"
+              target="_blank"
+              >Network layer load balancing</a
+            >.
+          </p>
+        </li>
+      </ol>
+
+      <h1>Farm design</h1>
+      <p>
+        In this article, we describe how one may configure HAproxy to route
+        traffic amongst 3
+        <a
+          href="https://www.reference.com/world-view/back-end-server-d4d0f1b851cd7424"
+          target="_blank"
+          >backend servers</a
+        >
+        in a server farm. These servers are; host1, host2, and host3.
+      </p>
+      <p><em>Figure 1</em></p>
+      <img src="./installation-images/network-diagram.drawio.png" alt="" />
+      <h1>Initial configurations</h1>
+      <p>
+        HAproxy runs on most
+        <a
+          href="https://www.techtarget.com/searchdatacenter/definition/Linux-distros-Linux-distribution"
+          target="_blank"
+          >Linux Distros</a
+        >, FreeBSD, and Solaris. This guide assumes you use Ubuntu 20.0.4 LTS or
+        any Debian-based Linux distro that uses apt as its
+        <a
+          href="https://itsfoss.com/package-manager/#:~:text=In%20simpler%20words%2C%20a%20package,like%20apt%2Dget%20or%20pacman."
+          target="_blank"
+          >package manager</a
+        >.
+      </p>
+      <div class="notice">
+        <div class="side-margin"></div>
+        <p><strong>Important Notice!</strong></p>
+        <ol>
+          <li>
+            <p>Ensure you have admin privileges and you are the root user.</p>
+          </li>
+          <li>
+            <p>
+              Reserve port 80 on your server for HAproxy to bind. Otherwise,
+              this setup may not work.
+            </p>
+          </li>
+        </ol>
+      </div>
+
+      <p>Check if HAproxy already exists using the command:</p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
+        <pre>root@ubuntu:~# haproxy -version</pre>
+      </div>
+      <p>
+        If the command does not return a version number, HAproxy is not
+        installed on your system. You must update your system and upgrade the
+        necessary packages.To update and upgrade your system simultaneously, use
+        the command:
+      </p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
+        <pre>root@ubuntu:~# sudo apt update && apt upgrade</pre>
+      </div>
+      <p>Then install HAproxy using the command:</p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
+        <pre>root@ubuntu:~# apt install haproxy</pre>
+      </div>
+      <p>Congratulations. HAproxy is on your Ubuntu PC.</p>
+      <div>
+        <p>
+          With the community edition, the default configuration file is in the
+          file path:
+        </p>
+        <div class="code-clip">
+          <button class="button-copy">
+            <span class="material-symbols-outlined"> content_copy </span>Copy
+            code
+          </button>
+          <pre>/etc/haproxy/haproxy.cfg</pre>
+        </div>
+      </div>
+      <p>
+        This configuration file has four sections; Global, Default, Frontend,
+        and Backend. Instead of using the default configuration file, we will
+        create a separate custom configuration.To create the configuration file
+        in the root directory, use the command:
+      </p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>root@ubuntu:~# vim proxy-conf.cfg</pre>
-        <p>If you do not have vim installed, use this command:</p>
+      </div>
+
+      <p>If you do not have vim installed, use this command:</p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>root@ubuntu:~# nano proxy-conf.cfg</pre>
-        <p>In this configuration file, let’s add four sections starting with Global.</p>
-        <h1>Section 1- Global Settings</h1>
-        <p>The global section at the top of the configuration file contains derivatives(settings) that apply to the entire HAproxy instance. These settings affect HAproxy at the lowest level. Since this section is mandatory,  one must define it before any other.In the configuration file that we just created, add these commands:</p>
+      </div>
+      <p>
+        In this configuration file, let’s add four sections starting with
+        Global.
+      </p>
+      <h1>Section 1- Global Settings</h1>
+      <p>
+        The global section at the top of the configuration file contains
+        derivatives(settings) that apply to the entire HAproxy instance. These
+        settings affect HAproxy at the lowest level. Since this section is
+        mandatory, one must define it before any other.In the configuration file
+        that we just created, add these commands:
+      </p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Code code
+        </button>
         <pre>
 global
     maxconn 100000
@@ -104,21 +246,53 @@ global
     nbthread 8
     daemon
         </pre>
-        <p><strong>Derivative explanations</strong></p>
+      </div>
+      <p><strong>Derivative explanations</strong></p>
 
-        <p><strong>maxconn:</strong> Specifies the maximum number of connections per second HAproxy should Handle.</p>
-        <p><strong>log:</strong> Specifies the directory where to send logs and the log level.</p>
-        <p><strong>nbthread:</strong> This directive specifies the number of threads each process should use. Each thread runs independently within a process that handles its own set of connections.</p>
-        <p><strong>daemon:</strong> Specifies that HAproxy should run in the background as a daemon.</p>
-        <div class="notice">
-            <div class="side-margin"></div>
-            <p><strong>Important Notice!</strong></p>
-            <p>The <strong>nbthread</strong> directive enables multi-threading capabilities in HAproxy, improving the performance and scalability of the load balancer. However, carefully consider system resources and application requirements. Spawning too many threads can lead to excessive CPU and memory usage, slowing the entire system.</p>
-        </div>
+      <p>
+        <strong>maxconn:</strong> Specifies the maximum number of connections
+        per second HAproxy should Handle.
+      </p>
+      <p>
+        <strong>log:</strong> Specifies the directory where to send logs and the
+        log level.
+      </p>
+      <p>
+        <strong>nbthread:</strong> This directive specifies the number of
+        threads each process should use. Each thread runs independently within a
+        process that handles its own set of connections.
+      </p>
+      <p>
+        <strong>daemon:</strong> Specifies that HAproxy should run in the
+        background as a daemon.
+      </p>
+      <div class="notice">
+        <div class="side-margin"></div>
+        <p><strong>Important Notice!</strong></p>
+        <p>
+          The <strong>nbthread</strong> directive enables multi-threading
+          capabilities in HAproxy, improving the performance and scalability of
+          the load balancer. However, carefully consider system resources and
+          application requirements. Spawning too many threads can lead to
+          excessive CPU and memory usage, slowing the entire system.
+        </p>
+      </div>
 
-        <h1>Section 2 - Default Settings</h1>
-        <p>The <strong>default</strong> section in the HAproxy configuration file defines settings(derivatives) that apply to all frontend and backend sections. This setting is optional, but it simplifies the configuration file and prevents the duplication of settings.</p>
-        <p>Add these settings below the global section of the configuration we created previously.</p>
+      <h1>Section 2 - Default Settings</h1>
+      <p>
+        The <strong>default</strong> section in the HAproxy configuration file
+        defines settings(derivatives) that apply to all frontend and backend
+        sections. This setting is optional, but it simplifies the configuration
+        file and prevents the duplication of settings.
+      </p>
+      <p>
+        Add these settings below the global section of the configuration we
+        created previously.
+      </p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>
 defaults
     timeout connect 10s
@@ -128,19 +302,72 @@ defaults
     mode http
     option httplog
         </pre>
-        <p><strong>Derivative explanations</strong></p>
-        <p><strong>timeout:</strong> This derivative sets the default timeout values for all frontend and backend sections that do not explicitly define the same setting.</p>
-        <ol>
-            <li><p><strong>connect</strong> - Sets the maximum time a client should wait when connecting to a server.</p></li>
-            <li><p><strong>client</strong> - Sets the maximum time a client can be inactive when connected to a server. The load balancer will terminate the connection after this time elapses.</p></li>
-            <li><p><strong>server</strong> - Determines how long the frontend should wait for a response from a backend server. The timeout server derivative acts similarly to the timeout client derivative but in reverse.</p></li>
-        </ol>
-        <p><strong>log:</strong> This log file also sets the default log level and destination for all frontend and backend sections that do not explicitly define the same setting. In this example, the global keyword specifies that the log messages should be sent to the global log facility, which is essentially the system log facility.</p>
-        <p><strong>mode:</strong> Specifies configurations for layer 4 and 7 load balancing; http for layer 7 and tcp for layer 4.</p>
-        <p><strong>httplog:</strong> This derivative enables http request logging to the HAproxy log directory. Necessary when one needs to log client metadata like their IP address, requested URL, and HTTP methods like <strong>GET</strong>, <strong>POST</strong>, <strong>DELETE</strong>, and <strong>PUT</strong>.</p>
-        <h1>Section 3 - Frontend Settings</h1>
-        <p>The <a href="https://www.ibm.com/docs/en/sva/9.0.5?topic=administration-front-end-load-balancer" target="_blank">frontend</a> section acts as a proxy between inbound traffic and the processing backend servers. One may use this section to define a listening IP address and Port on which clients connect. After the keyword frontend, the name that defines the <strong>frontend</strong> section follows.</p>
-        <p>Add the following commands to the configuration file.</p>
+      </div>
+      <p><strong>Derivative explanations</strong></p>
+      <p>
+        <strong>timeout:</strong> This derivative sets the default timeout
+        values for all frontend and backend sections that do not explicitly
+        define the same setting.
+      </p>
+      <ol>
+        <li>
+          <p>
+            <strong>connect</strong> - Sets the maximum time a client should
+            wait when connecting to a server.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>client</strong> - Sets the maximum time a client can be
+            inactive when connected to a server. The load balancer will
+            terminate the connection after this time elapses.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>server</strong> - Determines how long the frontend should
+            wait for a response from a backend server. The timeout server
+            derivative acts similarly to the timeout client derivative but in
+            reverse.
+          </p>
+        </li>
+      </ol>
+      <p>
+        <strong>log:</strong> This log file also sets the default log level and
+        destination for all frontend and backend sections that do not explicitly
+        define the same setting. In this example, the global keyword specifies
+        that the log messages should be sent to the global log facility, which
+        is essentially the system log facility.
+      </p>
+      <p>
+        <strong>mode:</strong> Specifies configurations for layer 4 and 7 load
+        balancing; http for layer 7 and tcp for layer 4.
+      </p>
+      <p>
+        <strong>httplog:</strong> This derivative enables http request logging
+        to the HAproxy log directory. Necessary when one needs to log client
+        metadata like their IP address, requested URL, and HTTP methods like
+        <strong>GET</strong>, <strong>POST</strong>, <strong>DELETE</strong>,
+        and <strong>PUT</strong>.
+      </p>
+      <h1>Section 3 - Frontend Settings</h1>
+      <p>
+        The
+        <a
+          href="https://www.ibm.com/docs/en/sva/9.0.5?topic=administration-front-end-load-balancer"
+          target="_blank"
+          >frontend</a
+        >
+        section acts as a proxy between inbound traffic and the processing
+        backend servers. One may use this section to define a listening IP
+        address and Port on which clients connect. After the keyword frontend,
+        the name that defines the <strong>frontend</strong> section follows.
+      </p>
+      <p>Add the following commands to the configuration file.</p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>
 frontend cranelux.com
     bind 192.168.10.150:80
@@ -150,15 +377,51 @@ frontend cranelux.com
     use_backend api_servers if path_api
     default_backend web_servers
         </pre>
-        <p><strong>Derivative explanations</strong></p>
-        <p><strong>bind:</strong> This directive attaches a listening socket to an IP address and port number. For example, the frontend in the settings above listens for incoming traffic on IP <strong>192.168.10.150</strong> and port <strong>80</strong>. The bind directive may also take additional parameters, such as SSL/TLS on port <strong>443</strong>.</p>
-        <p><strong>acl:</strong> The acl derivative defines complex conditions for processing requests. Administrators may define different behaviors based on criteria such as URL, client IP address, or HTTP method. In the previous settings, we set the rule <strong>path_api</strong> that tracks all incoming traffic on all URLs that begin with <strong>/api</strong>.</p>
-        <p><strong>redirect:</strong> This directive forwards inbound traffic to a different URL or scheme. In this example, the <strong>redirect</strong> directive forwards requests on port <strong>80</strong> to the equivalent HTTPS URL.</p>
-        <p><strong>use_backend:</strong> This directive specifies which backend to use when you match an acl rule. In the settings above, we send all traffic to the backend <strong>api_servers</strong> if it complies with the acl rule <strong>path_api</strong>.</p>
-        <p><strong>default_backend:</strong> This directive specifies the backend to process traffic that does not match any ACL rule. In this example, the <strong>default_backend</strong> is <strong>web_servers</strong>.</p>
-        <h1>Section 4 - Backend Settings</h1>
-        <p>This section allows admins to define backend servers and what roles they play. Whenever you create a backend, you must specify its name after the <strong>backend</strong> keyword.</p>
-        <p>In the config file that you created, add the following commands.</p>
+      </div>
+      <p><strong>Derivative explanations</strong></p>
+      <p>
+        <strong>bind:</strong> This directive attaches a listening socket to an
+        IP address and port number. For example, the frontend in the settings
+        above listens for incoming traffic on IP
+        <strong>192.168.10.150</strong> and port <strong>80</strong>. The bind
+        directive may also take additional parameters, such as SSL/TLS on port
+        <strong>443</strong>.
+      </p>
+      <p>
+        <strong>acl:</strong> The acl derivative defines complex conditions for
+        processing requests. Administrators may define different behaviors based
+        on criteria such as URL, client IP address, or HTTP method. In the
+        previous settings, we set the rule <strong>path_api</strong> that tracks
+        all incoming traffic on all URLs that begin with <strong>/api</strong>.
+      </p>
+      <p>
+        <strong>redirect:</strong> This directive forwards inbound traffic to a
+        different URL or scheme. In this example, the
+        <strong>redirect</strong> directive forwards requests on port
+        <strong>80</strong> to the equivalent HTTPS URL.
+      </p>
+      <p>
+        <strong>use_backend:</strong> This directive specifies which backend to
+        use when you match an acl rule. In the settings above, we send all
+        traffic to the backend <strong>api_servers</strong> if it complies with
+        the acl rule <strong>path_api</strong>.
+      </p>
+      <p>
+        <strong>default_backend:</strong> This directive specifies the backend
+        to process traffic that does not match any ACL rule. In this example,
+        the <strong>default_backend</strong> is <strong>web_servers</strong>.
+      </p>
+      <h1>Section 4 - Backend Settings</h1>
+      <p>
+        This section allows admins to define backend servers and what roles they
+        play. Whenever you create a backend, you must specify its name after the
+        <strong>backend</strong> keyword.
+      </p>
+      <p>In the config file that you created, add the following commands.</p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>
 backend web_servers
     balance roundrobin
@@ -171,19 +434,74 @@ backend web_servers
 backend api_servers
     server host3 192.168.10.148:80 cookie host3
         </pre>
-        <p><strong>Derivative explanations</strong></p>
-        <p><strong>balance:</strong> This directive specifies the load-balancing algorithm to distribute the traffic among the backend servers. In this configuration, we’ve used the round-robin algorithm.</p>
-        <p><strong>option httpchk GET /health:</strong> This directive specifies an HTTP health check performed on each server before forwarding the traffic. In this example, the health check is a `HEAD` request to the root directory “/”.</p>
-        <p><strong>cookie:</strong> The <strong>cookie</strong> parameter in the `server` line sets a cookie on the client’s browser when directed to a specific server. This cookie derivative maintains client affinity or sticky sessions with the same server.</p>
-        <p><strong>default-server:</strong> This derivative sets the default options to all servers within a backend section. The `check` and `maxconn` options in this example apply to all servers in the backend section.</p>
-        <ul>
-            <li><p><strong>check:</strong> This option specifies that HAproxy should periodically perform health checks on all backend servers. If any server fails the health check, HAproxy will stop forwarding traffic to it until it passes the health check again.</p></li>
-            <li><p><strong>maxconn:</strong> This option specifies the maximum number of concurrent connections established to a backend server. If the number of connections exceeds this limit, HAproxy will queue the additional ones.</p></li>
-        </ul>
-        <h1>Monitoring</h1>
-        <p>Monitoring enables administrators to gain real-time visibility into the performance and health of the HAproxy load balancer and its applications. The benefits include; Identifying and resolving issues, optimizing performance, and capacity planning.To enable monitoring, add the following command to the global section.</p>
+      </div>
+      <p><strong>Derivative explanations</strong></p>
+      <p>
+        <strong>balance:</strong> This directive specifies the load-balancing
+        algorithm to distribute the traffic among the backend servers. In this
+        configuration, we’ve used the round-robin algorithm.
+      </p>
+      <p>
+        <strong>option httpchk GET /health:</strong> This directive specifies an
+        HTTP health check performed on each server before forwarding the
+        traffic. In this example, the health check is a `HEAD` request to the
+        root directory “/”.
+      </p>
+      <p>
+        <strong>cookie:</strong> The <strong>cookie</strong> parameter in the
+        `server` line sets a cookie on the client’s browser when directed to a
+        specific server. This cookie derivative maintains client affinity or
+        sticky sessions with the same server.
+      </p>
+      <p>
+        <strong>default-server:</strong> This derivative sets the default
+        options to all servers within a backend section. The `check` and
+        `maxconn` options in this example apply to all servers in the backend
+        section.
+      </p>
+      <ul>
+        <li>
+          <p>
+            <strong>check:</strong> This option specifies that HAproxy should
+            periodically perform health checks on all backend servers. If any
+            server fails the health check, HAproxy will stop forwarding traffic
+            to it until it passes the health check again.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>maxconn:</strong> This option specifies the maximum number
+            of concurrent connections established to a backend server. If the
+            number of connections exceeds this limit, HAproxy will queue the
+            additional ones.
+          </p>
+        </li>
+      </ul>
+      <h1>Monitoring</h1>
+      <p>
+        Monitoring enables administrators to gain real-time visibility into the
+        performance and health of the HAproxy load balancer and its
+        applications. The benefits include; Identifying and resolving issues,
+        optimizing performance, and capacity planning.To enable monitoring, add
+        the following command to the global section.
+      </p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>stats socket /run/haproxy/admin.sock mode 660 level admin</pre>
-        <p><strong>stats socket:</strong> These directive enables the built-in statistics page in HAproxy, which provides real-time statistics and performance.By default, the statistics page is disabled, but you can enable it by creating a new listen section and adding the following lines.</p>
+      </div>
+      <p>
+        <strong>stats socket:</strong> These directive enables the built-in
+        statistics page in HAproxy, which provides real-time statistics and
+        performance.By default, the statistics page is disabled, but you can
+        enable it by creating a new listen section and adding the following
+        lines.
+      </p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>
 listen stats
     bind :8000
@@ -191,13 +509,29 @@ listen stats
     stats uri /stats
     stats refresh 10s
         </pre>
+      </div>
 
-        <p>The listen section displays the monitoring page on port <strong>8000</strong> displayed on the Uniform resource Identifier <strong>/stats</strong></p>.
-        <p>One may open the browser using the link: <strong>http://192.168.10.150:8000/stats</strong>. </p>
-        <p>After filling in these settings in the config file, save the file and exit. For vim users, exit using the command  <strong>:wq</strong> after escaping the Insert mode.</p>
+      <p>
+        The listen section displays the monitoring page on port
+        <strong>8000</strong> displayed on the Uniform resource Identifier
+        <strong>/stats</strong>
+      </p>
+      .
+      <p>
+        One may open the browser using the link:
+        <strong>http://192.168.10.150:8000/stats</strong>.
+      </p>
+      <p>
+        After filling in these settings in the config file, save the file and
+        exit. For vim users, exit using the command <strong>:wq</strong> after
+        escaping the Insert mode.
+      </p>
 
-        <p><strong>Here is the full configuration file:</strong></p>
-
+      <p><strong>Here is the full configuration file:</strong></p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>
 global
     maxconn 100000
@@ -240,17 +574,41 @@ listen stats
     stats uri /stats
     stats refresh 10s
         </pre>
-        <p>Run the load balancer using the command:</p>
+      </div>
+      <p>Run the load balancer using the command:</p>
+      <div class="code-clip">
+        <button class="button-copy">
+          <span class="material-symbols-outlined"> content_copy </span>Copy code
+        </button>
         <pre>root@ubuntu:~# haproxy -f proxy-conf.cfg</pre>
-        <h1>Conclusions</h1>
-        <p>After reading this guide, we expect you to set up all four major sections in HAproxy, load balance at layers 4 and 7, and enable monitoring of resources on the load balancer.</p>
+      </div>
+      <h1>Conclusions</h1>
+      <p>
+        After reading this guide, we expect you to set up all four major
+        sections in HAproxy, load balance at layers 4 and 7, and enable
+        monitoring of resources on the load balancer.
+      </p>
     </main>
-        <footer>
-        <h1>Manuel Smith</h1>
-        <p>Technical Writer and Node.Js Developer:  <span><a href="mailto:manuel@cranelux.com">manuel@cranelux.com</a></span></p>
-        <p><a href="#">Terms</a> | <a href="#">Privacy</a></p>
-        <p><a href="https://www.linkedin.com/in/manuel-smith/" target="_blank">Linkedin</a> | <a href="https://github.com/Manuel-Smith" target="_blank">GitHub</a> | <a href="https://www.codewars.com/users/Manuel-smith" target="_blank">CodeWars</a></p>
-      </footer>
+    <footer>
+      <h1>Manuel Smith</h1>
+      <p>
+        Technical Writer and Node.Js Developer:
+        <span
+          ><a href="mailto:manuel@cranelux.com">manuel@cranelux.com</a></span
+        >
+      </p>
+      <p><a href="#">Terms</a> | <a href="#">Privacy</a></p>
+      <p>
+        <a href="https://www.linkedin.com/in/manuel-smith/" target="_blank"
+          >Linkedin</a
+        >
+        | <a href="https://github.com/Manuel-Smith" target="_blank">GitHub</a> |
+        <a href="https://www.codewars.com/users/Manuel-smith" target="_blank"
+          >CodeWars</a
+        >
+      </p>
+    </footer>
     <script src="../menu.js"></script>
-</body>
+    <script src="../copyClipboard.js"></script>
+  </body>
 </html>

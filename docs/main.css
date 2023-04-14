@@ -157,11 +157,32 @@ footer p > span {
   background: orangered;
 }
 
-pre {
+.code-clip {
+  position: relative;
   padding: 1rem;
   margin: 1rem 0;
   line-height: 1.6;
   background-color: var(--color-primary);
   outline: 1px rgba(0, 0, 0, 0.164) solid;
   border-radius: 4px;
+}
+
+.code-clip .button-copy {
+  position: absolute;
+  right: 1rem;
+  /* border: none; */
+  border: 1px solid rgba(0, 0, 0, 0.164);
+  background-color: white;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.code-clip .button-copy:active {
+  background-color: transparent;
+}
+
+.code-clip .button-copy span {
+  color: rgba(180, 17, 99, 0.863);
 }
