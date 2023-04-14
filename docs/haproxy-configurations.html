@@ -54,7 +54,36 @@
       </div>
     </div>
     <main>
-      <h1>Introduction</h1>
+      <nav class="table-of-contents">
+        <h2>Table of content</h2>
+        <ol>
+          <li><a href="#intro-h1-haproxy">Introduction</a></li>
+          <li>
+            <a href="#lb-modes-h1-haproxy">Load balancing modes in HAproxy</a>
+          </li>
+          <li><a href="#farm-design-h1-haproxy">Farm Design</a></li>
+          <li><a href="#initial-conf-h1-haproxy">Initial configurations</a></li>
+          <li>
+            <a href="#global-settings-h1-haproxy"
+              >Section 1 - Global Settings</a
+            >
+          </li>
+          <li>
+            <a href="#default-settings-haproxy">Section 2 - Default Settings</a>
+          </li>
+          <li>
+            <a href="#frontend-settings-h1-haproxy"
+              >Section 3 - Frontend Settings</a
+            >
+          </li>
+          <li>
+            <a href="#backend-settings-haproxy">Section 4 - Backend Settings</a>
+          </li>
+          <li><a href="#monitoring-settings-h1-haproxy">Monitoring</a></li>
+          <li><a href="#conclusion-h1-haproxy">Conclusions</a></li>
+        </ol>
+      </nav>
+      <h1 id="intro-h1-haproxy">Introduction</h1>
       <p>
         To relay inbound traffic across multiple
         <a
@@ -81,7 +110,7 @@
         load-balancing solutions. Primarily built in C, accounting for its speed
         and efficiency.
       </p>
-      <h1>Load balancing modes in HAproxy</h1>
+      <h1 id="lb-modes-h1-haproxy">Load balancing modes in HAproxy</h1>
       <ol>
         <li>
           <p>
@@ -118,7 +147,7 @@
         </li>
       </ol>
 
-      <h1>Farm design</h1>
+      <h1 id="farm-design-h1-haproxy">Farm design</h1>
       <p>
         In this article, we describe how one may configure HAproxy to route
         traffic amongst 3
@@ -131,7 +160,7 @@
       </p>
       <p><em>Figure 1</em></p>
       <img src="./installation-images/network-diagram.drawio.png" alt="" />
-      <h1>Initial configurations</h1>
+      <h1 id="initial-conf-h1-haproxy">Initial configurations</h1>
       <p>
         HAproxy runs on most
         <a
@@ -226,7 +255,7 @@
         In this configuration file, let’s add four sections starting with
         Global.
       </p>
-      <h1>Section 1- Global Settings</h1>
+      <h1 id="global-settings-h1-haproxy">Section 1 - Global Settings</h1>
       <p>
         The global section at the top of the configuration file contains
         derivatives(settings) that apply to the entire HAproxy instance. These
@@ -278,7 +307,7 @@ global
         </p>
       </div>
 
-      <h1>Section 2 - Default Settings</h1>
+      <h1 id="default-settings-haproxy">Section 2 - Default Settings</h1>
       <p>
         The <strong>default</strong> section in the HAproxy configuration file
         defines settings(derivatives) that apply to all frontend and backend
@@ -350,7 +379,7 @@ defaults
         <strong>GET</strong>, <strong>POST</strong>, <strong>DELETE</strong>,
         and <strong>PUT</strong>.
       </p>
-      <h1>Section 3 - Frontend Settings</h1>
+      <h1 id="frontend-settings-h1-haproxy">Section 3 - Frontend Settings</h1>
       <p>
         The
         <a
@@ -411,7 +440,7 @@ frontend cranelux.com
         to process traffic that does not match any ACL rule. In this example,
         the <strong>default_backend</strong> is <strong>web_servers</strong>.
       </p>
-      <h1>Section 4 - Backend Settings</h1>
+      <h1 id="backend-settings-haproxy">Section 4 - Backend Settings</h1>
       <p>
         This section allows admins to define backend servers and what roles they
         play. Whenever you create a backend, you must specify its name after the
@@ -477,7 +506,7 @@ backend api_servers
           </p>
         </li>
       </ul>
-      <h1>Monitoring</h1>
+      <h1 id="monitoring-settings-h1-haproxy">Monitoring</h1>
       <p>
         Monitoring enables administrators to gain real-time visibility into the
         performance and health of the HAproxy load balancer and its
@@ -582,7 +611,7 @@ listen stats
         </button>
         <pre>root@ubuntu:~# haproxy -f proxy-conf.cfg</pre>
       </div>
-      <h1>Conclusions</h1>
+      <h1 id="conclusion-h1-haproxy">Conclusions</h1>
       <p>
         After reading this guide, we expect you to set up all four major
         sections in HAproxy, load balance at layers 4 and 7, and enable

@@ -165,6 +165,7 @@ footer p > span {
   background-color: var(--color-primary);
   outline: 1px rgba(0, 0, 0, 0.164) solid;
   border-radius: 4px;
+  overflow-x: scroll;
 }
 
 .code-clip .button-copy {
@@ -185,4 +186,21 @@ footer p > span {
 
 .code-clip .button-copy span {
   color: rgba(180, 17, 99, 0.863);
+}
+
+.table-of-contents {
+  position: fixed;
+  left: 13rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.253);
+}
+
+.table-of-contents > ol > li {
+  line-height: 3;
+}
+
+.table-of-contents > ol > li > a {
+  border-bottom: none;
+  color: var(--color-dark-brown);
 }
