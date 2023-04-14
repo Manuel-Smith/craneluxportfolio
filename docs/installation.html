@@ -55,7 +55,7 @@
         </div>
       </div>
     <main>
-        <p>Smoothwall is an open source Linux based Firewall designed to protect networks from malicious traffic and unauthorized access. Some features shipped with Smoothwall include;<br><br></p>
+        <p>Smoothwall is an open source Linux based Firewall designed to protect networks from malicious traffic and unauthorized access. Some features shipped with Smoothwall include;</p>
         <ol>
             <li>Outbound and inbound web content filtering.</li>
             <li>Support for LAN, DMZ, and wireless networks.</li>
@@ -63,12 +63,12 @@
             <li>Virtual Private Network.</li>
             <li>Portforwardinding, etc.</li>
         </ol>
-        <p><br><br>In this guide, we discuss how to install Smoothwall Express in <a href="https://www.virtualbox.org/" target="_blank">Oracle VirtualBox</a>. </p>
+        <p>In this guide, we discuss how to install Smoothwall Express in <a href="https://www.virtualbox.org/" target="_blank">Oracle VirtualBox</a>. </p>
 
         <h1>Downloading the ISO file</h1>
         <p>One may download the ISO from SourceForge. Click <a href="https://smoothwall.org/download.html" target="_blank">here</a> to download. For this guide, select the iso file <strong>Express-3.1-x86064.iso</strong> from the provided list.</p>
         <h1>Setup In VirtualBox</h1>
-        <p>In your VirtualBox application: <br><br></p>
+        <p>In your VirtualBox application: </p>
         <ol>
             <li>Click <strong>New</strong>. A dialog box will appear.</li>
             <li>Enter a <strong>Name</strong> to identify the Smoothwall Virtual machine.</li>
@@ -88,7 +88,7 @@
         </ol>
 
         <h1>VirtualBox Network Configurations</h1>
-        <p>Smoothwall will only work if at least 2 Network adapters are in Bridged mode. <br><br></p>
+        <p>Smoothwall will only work if at least 2 Network adapters are in Bridged mode. </p>
         <ol>
             <li>With the smoothwall instance selected, click the <strong>settings</strong> button.</li>
             <li>Click the <strong>Network</strong> tab.</li>
@@ -99,7 +99,7 @@
             <li>Click <strong>OK</strong>.</li>
         </ol>
         <h1>Installation</h1>
-        <p>With the smoothwall instance selected: <br><br></p>
+        <p>With the smoothwall instance selected: </p>
         <ol>
             <li>Click the <strong>Start</strong> button to start the installation. A new window instance will appear.</li>
             <li>Select the Boot Option, <strong>Install Smoothwall Express</strong>.</li>
@@ -124,7 +124,7 @@
         </ol>
 
         <h3>Card assignments</h3>
-        <p>In this section, we assign network cards to the Green and Red Interfaces. <br><br></p>
+        <p>In this section, we assign network cards to the Green and Red Interfaces. </p>
         <ol>
             <li>Start with Green and press <strong>OK</strong>.</li>
             <li>Then Red and press <strong>OK</strong>. You’ll get a message. <strong>All cards successfully allocated.</strong></li>
@@ -132,7 +132,7 @@
             <li>Press <strong>OK</strong>.</li>
         </ol>
         <h3>Address settings</h3>
-        <p>In this section, we add IP addresses to the Green and Red Interfaces. <br><br></p>
+        <p>In this section, we add IP addresses to the Green and Red Interfaces. </p>
         <ol>
             <li>Select <strong>Green</strong>.</li>
             <li>Press <strong>OK</strong> on the dialog box with a warning shows up.</li>
@@ -145,7 +145,7 @@
             <li>In the <strong>Address settings</strong> section, Press <strong>Done</strong>.</li>
         </ol>
         <h3>DNS and Gateway settings</h3>
-        <p>In this section, we configure DNS and Gateway settings for the firewall. <br><br></p>
+        <p>In this section, we configure DNS and Gateway settings for the firewall. </p>
         <ol>
             <li>Add the Ip address for the <strong>primary DNS</strong> in IPV4 format.</li>
             <li>Add the IP address for the <strong>secondary DNS</strong> in ipv4 format.</li>
@@ -171,9 +171,9 @@
             <li>Press <strong>OK</strong>.</li>
         </ol>
 
-        <p><br><br>Congratulations! The setup is complete.<br><br></p>
+        <p>Congratulations! The setup is complete.</p>
         <img src="./installation-images/smoothwall20.PNG" alt="">
-        <p>Press <strong>OK</strong> to reboot.<br><br></p>
+        <p>Press <strong>OK</strong> to reboot.</p>
         <p>After rebooting, access the firewall instance in the web browser using IP address <strong>https://&lt;&lt;ip.addr&gt;&gt;:81</strong>, For example, <strong>http://192.168.88.2:81</strong></p>
         <img src="./installation-images/smoothwall21.PNG" alt="">
         <p>The default <strong>Username</strong> is <em><u>admin</u></em>, and the password is one you set.</p>
