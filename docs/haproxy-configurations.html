@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Balancing with HAproxy</title>
+</head>
+<body>
+     
+    <header></header>
+    <main>
+        <h1>Introduction</h1>
+        <p>To relay inbound traffic across multiple computing resources such as servers, storage devices, or other network devices, we use Load balancers. Load balancers ensure we do not overwhelm resources with many traffic requests while others remain idle. This reduces the risk of system failure and improves scalability and overall response time. <br><br>HAproxy is one of the fastest and most cost-effective open-source load-balancing solutions. Primarily built in C, accounting for its robustness and speed.</p>
+        <h1>Load balancing modes in HAproxy</h1>
+        <ol>
+            <li><p>HTTP - Performs content switching, SSL inspection, SSL termination, Session persistence, etc. This mode represents Application layer load balancing.</p></li>
+            <li><p>TCP - Relays traffic to backend servers in a fashion determined by a load-balancing algorithm. Works at layers 3 and 4 of the OSI model. This mode represents Network layer load balancing.</p></li>
+        </ol>
+
+        <h1>Farm design</h1>
+        <p>In this article, we describe how one may configure HAproxy to route traffic amongst 3 backend servers in a server farm. These servers are; host1, host2, and host3.<br><br></p>
+        <p>Figure 1.</p>
+        <img src="./installation-images/network-diagram.drawio.png" alt="">
+        <h1>Initial configurations</h1>
+        <p>HAproxy runs on most Linux Distros, FreeBSD, and Solaris. This guide assumes you are running Ubuntu 20.0.4 LTS or any Debian-based Linux distro that uses apt as its package manager.</p>
+        <div>
+            <p>Important Notice!</p>
+            <ol>
+                <li><p>Ensure you have admin privileges and you are the root user.</p></li>
+                <li><p>Reserve port 80 on your server for HAproxy to bind. Otherwise, this setup may not work.</p></li>
+            </ol>
+        </div>
+
+        <p>Check if HAproxy already exists using the command:</p>
+        <pre>root@ubuntu:~# haproxy -version</pre>
+        <p>If the command does not return a version number, HAproxy is not installed on your system. You must update your system and upgrade the necessary packages.<br><br>To update and upgrade your system simultaneously, use the command:</p>
+        <pre>root@ubuntu:~# sudo apt update && apt upgrade</pre>
+        <p>Then install HAproxy using the command:</p>
+        <pre>root@ubuntu:~# apt install haproxy</pre>
+        <p>Congratulations. HAproxy is on your Ubuntu PC.</p>
+        <div>
+            <p>With the community edition, the default configuration file is in the file path:</p>
+            <pre>/etc/haproxy/haproxy.cfg</pre>
+        </div>
+        <p>This configuration file has four sections; Global, Default, Frontend, and Backend. Instead of using the default configuration file, we will create a separate custom configuration.<br><br>To create the configuration file in the root directory, use the command:</p>
+        <pre>root@ubuntu:~# vim proxy-conf.cfg</pre>
+        <p>If you do not have vim installed, use this command:</p>
+        <pre>root@ubuntu:~# nano proxy-conf.cfg</pre>
+        <p>In this configuration file, let’s add four sections starting with Global.</p>
+        <h1>Section 1- Global Settings</h1>
+        <p>The global section at the top of the configuration file contains derivatives(settings) that apply to the entire HAproxy instance. These settings affect HAproxy at the lowest level. Since this section is mandatory,  one must define it before any other.<br><br>In the configuration file that we just created, add these commands:</p>
+        <pre>
+global
+    maxconn 100000
+    log /dev/log local0
+    log /dev/log local1 notice
+    nbthread 8
+    daemon
+        </pre>
+        <p><strong>Derivative explanations</strong></p>
+
+        <p>maxconn: Specifies the maximum number of connections per second HAproxy should Handle.</p>
+        <p>log: Specifies the directory where to send logs and the log level.</p>
+        <p>nbthread: This directive specifies the number of threads each process should use. Each thread runs independently within a process that handles its own set of connections.</p>
+        <p>daemon: Specifies that HAproxy should run in the background as a daemon.</p>
+        <div>
+            <p>Important Notice!</p>
+            <p>The `nbthread` directive enables multi-threading capabilities in HAproxy, improving the performance and scalability of the load balancer. However, carefully consider system resources and application requirements. Spawning too many threads can lead to excessive CPU and memory usage, slowing the entire system.</p>
+        </div>
+
+        <h1>Section 2 - Default Settings</h1>
+        <p>The default section in the HAproxy configuration file defines settings(derivatives) that apply to all frontend and backend sections. This setting is optional, but it simplifies the configuration file and prevents the duplication of settings.<br><br>Add these settings below the global section of the configuration we created previously.</p>
+        <pre>
+defaults
+    timeout connect 10s
+    timeout client 30s
+    timeout server 30s
+    log global
+    mode http
+    option httplog
+        </pre>
+        <p><strong>Derivative explanations</strong></p>
+        <p>timeout: This derivative sets the default timeout values for all frontend and backend sections that do not explicitly define the same setting. </p>
+        <ol>
+            <li><p>Connect - Sets the maximum time a client should wait when connecting to a server.</p></li>
+            <li><p>Client - Sets the maximum time a client can be inactive when connected to a server. The load balancer will terminate the connection after this time elapses.</p></li>
+            <li><p>Server - Determines how long the frontend should wait for a response from a backend server. The timeout server derivative acts similarly to the timeout client derivative but in reverse.</p></li>
+        </ol>
+        <p>log: This log file also sets the default log level and destination for all frontend and backend sections that do not explicitly define the same setting. In this example, the global keyword specifies that the log messages should be sent to the global log facility, which is essentially the system log facility.</p>
+        <p>mode: Specifies configurations for layer 4 and 7 load balancing; http for layer 7 and tcp for layer 4.</p>
+        <p>httplog: This derivative enables http request logging to the HAproxy log directory. Necessary when one needs to log client metadata like their IP address, requested URL, and HTTP methods like GET POST, DELETE, and PUT.</p>
+        <h1>Section 3 - Frontend Settings</h1>
+        <p>The frontend section acts as a proxy between inbound traffic and the processing backend servers. One may use this section to define a listening IP address and Port on which clients connect. After the keyword frontend, the name that defines the frontend section follows.<br><br>Add the following commands to the configuration file.</p>
+        <pre>
+frontend cranelux.com
+    bind 192.168.10.150:80
+    bind 192.168.10.150:443 ssl crt /etc/ssl/certs/mysite.pem
+    acl path_api path_beg /api
+    http-request redirect scheme https unless { ssl_fc }
+    use_backend api_servers if path_api
+    default_backend web_servers
+        </pre>
+        <p><strong>Derivative explanations</strong></p>
+        <p>bind: This directive attaches a listening socket to an IP address and port number. For example, the frontend in the settings above listens for incoming traffic on IP 192.168.10.150 and port 80. The bind directive may also take additional parameters, such as SSL/TLS on port 443.<br><br></p>
+        <p>acl: The acl derivative defines complex conditions for processing requests. Administrators may define different behaviors based on criteria such as URL, client IP address, or HTTP method. In the previous settings, we set the rule path_api that tracks all incoming traffic on all URLs that begin with /api.</p>
+        <p>redirect: This directive forwards inbound traffic to a different URL or scheme. In this example, the redirect directive forwards requests on port 80 to the equivalent HTTPS URL.</p>
+        <p>use_backend: This directive specifies which backend to use when you match an acl rule. In the settings above, we send all traffic to the backend api_servers if it complies with the acl rule path_api.</p>
+        <p>default_backend: This directive specifies the backend to process traffic that does not match any ACL rule. In this example, the default_backend is web-servers.</p>
+        <h1>Section 4 - Backend Settings</h1>
+        <p>This section allows admins to define backend servers and what roles they play. Whenever you create a backend, you must specify its name after the backend keyword.<br><br>In the config file that you created, add the following commands.</p>
+        <pre>
+backend web_servers
+    balance roundrobin
+    cookie SERVERUSED insert indirect nocache
+    option httpchk HEAD /
+    default-server check maxconn 20
+    server host1 192.168.10.146:80 cookie host1
+    server host2 192.168.10.147:80 cookie host2
+
+backend api_servers
+    server host3 192.168.10.148:80 cookie host3
+        </pre>
+        <p><strong>Derivative explanations</strong></p>
+        <p>balance: This directive specifies the load-balancing algorithm to distribute the traffic among the backend servers. In this configuration, we’ve used the round-robin algorithm.</p>
+        <p>option httpchk GET /health: This directive specifies an HTTP health check performed on each server before forwarding the traffic. In this example, the health check is a `HEAD` request to the root directory “/”.<br><br></p>
+        <p>cookie: The `cookie` parameter in the `server` line sets a cookie on the client’s browser when directed to a specific server. This cookie derivative maintains client affinity or sticky sessions with the same server.<br><br></p>
+        <p>default-server: This derivative sets the default options to all servers within a backend section. The `check` and `maxconn` options in this example apply to all servers in the backend section.<br><br></p>
+        <ol>
+            <ul>
+                <li><p>check: This option specifies that HAproxy should periodically perform health checks on all backend servers. If any server fails the health check, HAproxy will stop forwarding traffic to it until it passes the health check again.</p></li>
+                <li><p>maxconn: This option specifies the maximum number of concurrent connections established to a backend server. If the number of connections exceeds this limit, HAproxy will queue the additional ones.</p></li>
+            </ul>
+        </ol>
+        <h1>Monitoring</h1>
+        <p>Monitoring enables administrators to gain real-time visibility into the performance and health of the HAproxy load balancer and its applications. The benefits include; Identifying and resolving issues, optimizing performance, and capacity planning.<br><br>To enable monitoring, add the following command to the global section.</p>
+        <pre>stats socket /run/haproxy/admin.sock mode 660 level admin</pre>
+        stats socket: These directive enables the built-in statistics page in HAproxy, which provides real-time statistics and performance.<br><br>By default, the statistics page is disabled, but you can enable it by creating a new listen section and adding the following lines.
+        <pre>
+listen stats
+    bind :8000
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+        </pre>
+
+        <p>The listen section displays the monitoring page on port 8000 displayed on the Uniform resource Identifier /stats.<br><br>One may open the browser using the link: 192.168.10.150:8000/stats. </p>
+        <p>After filling in these settings in the config file, save the file and exit. For vim users, exit using the command  :wq after escaping the Insert mode.</p>
+
+        <p><strong>Here is the full configuration file:</strong></p>
+
+        <pre>
+global
+    maxconn 100000
+    log /dev/log local0
+    log /dev/log local1 notice
+    nbthread 8
+    daemon
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+
+defaults
+    timeout connect 10s
+    timeout client 30s
+    timeout server 30s
+    log global
+    mode http
+    option httplog
+
+frontend cranelux.com
+    bind 192.168.10.150:80
+    bind 192.168.10.150:443 ssl crt /etc/ssl/certs/mysite.pem
+    acl path_api path_beg /api
+    http-request redirect scheme https unless { ssl_fc }
+    use_backend api_servers if path_api
+    default_backend web_servers
+
+backend web_servers
+    balance roundrobin
+    cookie SERVERUSED insert indirect nocache
+    option httpchk HEAD /
+    default-server check maxconn 20
+    server host1 192.168.10.146:80 cookie host1
+    server host2 192.168.10.147:80 cookie host2
+
+backend api_servers
+    server host3 192.168.10.148:80 cookie host3
+
+listen stats
+    bind :8000
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+        </pre>
+        <p>Run the load balancer using the command:</p>
+        <pre>root@ubuntu:~# haproxy -f proxy-conf.cfg</pre>
+        <p><strong>Conclusion</strong></p>
+        <p>After reading this guide, we expect you to set up all four major sections in HAproxy, load balance at layers 4 and 7, and enable monitoring of resources on the load balancer.</p>
+    </main>
+    <footer></footer>
+</body>
+</html>
