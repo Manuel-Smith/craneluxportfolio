@@ -5,10 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load Balancing with HAproxy</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="image/png" href="../images/logo.png" />
+    <link rel="stylesheet" href="../utilities.css">
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  />
 </head>
 <body>
-     
-    <header></header>
+        <header>
+        <div class="margin-sides header-holder">
+          <div class="icon-frame">
+            <a href="/">
+              <span class="material-symbols-outlined"> keyboard_backspace </span>
+            </a>
+          </div>
+  
+          <div id="menu-item" class="icon-frame menu-item">
+            <div class="bars bar-tilt"></div>
+            <div class="bars bar-none"></div>
+            <div class="bars bar-tilt"></div>
+          </div>
+          <div class="menu">
+            <ul>
+              <li>
+                <span class="material-symbols-outlined"> home </span>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">
+                  supervised_user_circle
+                </span>
+                <a href="/about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+            <div class="hero-section">
+        <div class="overlay">
+            <div>
+                <h1>How to Configure HAproxy For Load Balancing</h1>
+            </div>
+            <div>
+                <p>April 13, 2023 <span>Networking | Load Balancing</span></p>
+            </div>
+        </div>
+      </div>
     <main>
         <h1>Introduction</h1>
         <p>To relay inbound traffic across multiple computing resources such as servers, storage devices, or other network devices, we use Load balancers. Load balancers ensure we do not overwhelm resources with many traffic requests while others remain idle. This reduces the risk of system failure and improves scalability and overall response time. <br><br>HAproxy is one of the fastest and most cost-effective open-source load-balancing solutions. Primarily built in C, accounting for its robustness and speed.</p>
@@ -196,6 +240,12 @@ listen stats
         <p><strong>Conclusion</strong></p>
         <p>After reading this guide, we expect you to set up all four major sections in HAproxy, load balance at layers 4 and 7, and enable monitoring of resources on the load balancer.</p>
     </main>
-    <footer></footer>
+        <footer>
+        <h1>Manuel Smith</h1>
+        <p>Technical Writer and Node.Js Developer:  <span><a href="mailto:manuel@cranelux.com">manuel@cranelux.com</a></span></p>
+        <p><a href="#">Terms</a> | <a href="#">Privacy</a></p>
+        <p><a href="https://www.linkedin.com/in/manuel-smith/" target="_blank">Linkedin</a> | <a href="https://github.com/Manuel-Smith" target="_blank">GitHub</a> | <a href="https://www.codewars.com/users/Manuel-smith" target="_blank">CodeWars</a></p>
+      </footer>
+    <script src="../menu.js"></script>
 </body>
 </html>
