@@ -72,14 +72,19 @@ main {
   max-width: 720px;
   margin: 0 auto;
 }
+
+aside {
+  padding-top: 3rem;
+  max-width: 720px;
+}
 p {
   margin: 1.5rem 0;
+  line-height: 1.8;
 }
 img {
   position: relative;
   margin: 1rem 0;
   width: 100%;
-  padding: 1rem;
 }
 
 strong {
@@ -181,7 +186,7 @@ footer p > span {
 }
 
 .code-clip .button-copy:active {
-  background-color: transparent;
+  background-color: rgba(128, 128, 128, 0.247);
 }
 
 .code-clip .button-copy span {
@@ -189,18 +194,60 @@ footer p > span {
 }
 
 .table-of-contents {
-  position: fixed;
-  left: 13rem;
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 1rem 0 0 1rem;
   border: 1px solid rgba(0, 0, 0, 0.253);
+  height: 40vh;
+  overflow-y: scroll;
+  background: whitesmoke;
+  display: none;
 }
 
 .table-of-contents > ol > li {
-  line-height: 3;
+  line-height: 2.5;
 }
 
-.table-of-contents > ol > li > a {
+.table-of-contents > ol > li > a,
+.h2-navlink a {
   border-bottom: none;
   color: var(--color-dark-brown);
 }
+
+.h2-navlink,
+.h3-navlink {
+  list-style: none;
+  color: var(--color-dark-brown);
+  border-bottom: none;
+  margin: -1rem 0 0 -1rem;
+}
+
+.table-of-contents > div {
+  position: relative;
+}
+
+.table-of-contents > div > span {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.table-of-contents-header {
+  gap: 20px;
+  cursor: pointer;
+}
+
+.table-of-contents-header .material-symbols-outlined {
+  background: var(--color-dark-brown);
+  color: antiquewhite;
+  font-size: 2.5rem;
+  border-radius: 5px;
+}
+
+.main-container {
+  margin: 3rem;
+  display: grid;
+}
+
+/* #main-class {
+  margin: 0 10rem;
+} */

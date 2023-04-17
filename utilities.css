@@ -237,18 +237,18 @@ main .tab-div div img {
   box-shadow: var(--all-shadows);
 }
 
-.portfolio-section{
+.portfolio-section {
   padding: 2rem;
   background-color: white;
 }
-.resources-links{
+.resources-links {
   position: relative;
   top: 20rem;
   display: grid;
   gap: 10rem;
 }
 
-.resources-links .portfolio-section h1{
+.resources-links .portfolio-section h1 {
   text-align: center;
   font-size: 4rem;
   color: var(--color-dark-brown);
@@ -262,20 +262,20 @@ main .tab-div div img {
   box-shadow: var(--all-shadows);
 }
 
-.resources-links .resources:hover{
+.resources-links .resources:hover {
   transition: 500ms ease-in-out;
   background-color: transparent;
 }
 
-.resources-links .resources > div{
+.resources-links .resources > div {
   width: 50%;
 }
 
-.resources-links .resources .resource-image{
-position: relative;
+.resources-links .resources .resource-image {
+  position: relative;
 }
 
-.resources-links .resources .resource-image img{
+.resources-links .resources .resource-image img {
   position: absolute;
   top: 10%;
   width: 90%;
@@ -283,19 +283,19 @@ position: relative;
 }
 
 .resources-links .resources .resource-copy h1,
-.resources-links .resources .resource-copy h2{
- color: var(--color-dark-brown);
+.resources-links .resources .resource-copy h2 {
+  color: var(--color-dark-brown);
 }
 
-.resources-links .resources .resource-copy p{
+.resources-links .resources .resource-copy p {
   font-size: 1.1rem;
   margin: 1rem 0;
   line-height: 1.4;
 }
-.resources-links .resources .resource-copy ul{
+.resources-links .resources .resource-copy ul {
   padding: 0.5rem;
 }
-.resources-links .resources .resource-copy ul li{
+.resources-links .resources .resource-copy ul li {
   padding: 0.2rem 0;
   display: flex;
   align-content: center;
@@ -316,17 +316,23 @@ position: relative;
   box-shadow: var(--all-shadows);
 }
 
-footer h1{
+footer h1 {
   text-align: center;
   font-size: 2.5rem;
   line-height: 3;
 }
-footer p{
+footer p {
   line-height: 2;
   text-align: center;
   font-size: 1.4rem;
 }
 
-footer p > span{
+footer p > span {
   color: rgb(180, 23, 70);
+}
+
+@media screen and (max-width: 900px) {
+  .header-holder .menu {
+    left: calc(100% -50%);
+  }
 }
