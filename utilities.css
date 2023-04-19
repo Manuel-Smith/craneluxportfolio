@@ -262,6 +262,7 @@ main .tab-div div img {
   border-radius: 20px;
   padding: 5rem 1rem;
   box-shadow: var(--all-shadows);
+  height: auto;
 }
 
 .resources-links .resources:hover {
@@ -377,5 +378,38 @@ footer p > span {
   .header-holder .mini-menu {
     flex-direction: column;
     gap: 2px;
+  }
+
+  .hero-section .overlay div h1 {
+    padding-top: 2rem;
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .resources-links .resources {
+    display: grid;
+    justify-items: center;
+    padding: 0;
+  }
+
+  .resources-links .resources .resource-image {
+    position: static;
+  }
+
+  .resources-links .resources > div {
+    width: 100%;
+  }
+
+  .resources-links .resources .resource-image img {
+    position: static;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .resources-links .resources .resource-copy {
+    height: 100%;
+    padding: 2rem;
   }
 }
