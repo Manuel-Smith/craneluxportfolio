@@ -1,12 +1,21 @@
 .config-menu {
-  /* background: yellow; */
   position: fixed;
   width: 23vw;
   max-height: 70vh;
   top: 7.8rem;
-  /* padding: 1rem; */
   margin: 0.4rem;
-  /* overflow-y: scroll; */
+}
+
+.side-toc-icon span {
+  font-size: 3.2rem;
+  position: fixed;
+  top: 10rem;
+  z-index: 6;
+  background: #f1fa76;
+  margin: 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  display: none;
 }
 
 .config-menu nav ul li {
@@ -146,11 +155,23 @@
 }
 
 @media screen and (max-width: 1300px) {
-  .config-menu {
+  /* .config-menu {
     display: none;
+  } */
+
+  .config-menu {
+    z-index: 4;
+    width: 70wv;
+    display: none;
+    width: 70vw;
+    top: -4rem;
   }
   .main-content {
     left: 5rem;
+  }
+
+  .side-toc-icon span {
+    display: block;
   }
 
   .main-content .div-sections {
@@ -176,5 +197,9 @@
 
   .code-docs {
     max-height: 50vh;
+  }
+
+  .config-menu {
+    width: 95vw;
   }
 }
