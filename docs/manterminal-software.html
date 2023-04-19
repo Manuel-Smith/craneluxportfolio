@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manterminal Fs Utility</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="icon" type="image/png" href="../images/logo.png" />
+    <link rel="stylesheet" href="../manterminal-styling.css" />
+    <link rel="stylesheet" href="../utilities.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+  <body>
+    <header id="header">
+      <div class="margin-sides header-holder">
+        <div class="icon-frame">
+          <a href="/">
+            <span class="material-symbols-outlined"> keyboard_backspace </span>
+          </a>
+        </div>
+
+        <div id="menu-item" class="icon-frame menu-item">
+          <div class="bars bar-tilt"></div>
+          <div class="bars bar-none"></div>
+          <div class="bars bar-tilt"></div>
+        </div>
+        <div class="menu">
+          <ul>
+            <li>
+              <span class="material-symbols-outlined"> home </span>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <span class="material-symbols-outlined">
+                supervised_user_circle
+              </span>
+              <a href="/about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <aside class="config-menu">
+      <div class="toc-header"><h1>Guide</h1></div>
+      <nav>
+        <p>Project Overview</p>
+        <p>What is Manterminal</p>
+        <p>How It works</p>
+        <p>&gt;_mkfile</p>
+        <p>&gt;_delfile</p>
+        <p>&gt;_renfile</p>
+        <p>&gt;_appendfile</p>
+        <p>&gt;_--help</p>
+        <p>Who Is the Doc For?</p>
+        <p>Node Installation</p>
+        <p>Importing Packages</p>
+        <p>Constant Variables</p>
+        <p>Opening and Watching the Test File</p>
+        <p>commandFileHandler.on() Method</p>
+        <p>Memory Management</p>
+        <p>Operations module</p>
+        <p>createFile</p>
+        <p>deleteFile</p>
+        <p>renameFile</p>
+        <p>addToFile</p>
+        <p>helpGuide</p>
+        <p>exporting module functions</p>
+        <p>Additional resources</p>
+      </nav>
+    </aside>
+    <div class="main-content">
+      <div class="div-sections">
+        <div class="content-area">
+          <h1>Project Overview</h1>
+          <h2>What is Manterminal?</h2>
+          <p>
+            Manterminal is a File System utility that emulates a command line
+            interface. The purpose of this tool is to:
+          </p>
+          <ol>
+            <li>Create files</li>
+            <li>Delete files</li>
+            <li>Rename files</li>
+            <li>Add content to a file.</li>
+          </ol>
+          <p>
+            Manterminal is a personal project, and I am working diligently to
+            add more functionality. With time, I will add a User-friendly CLI,
+            making it the go-to command line tool compatible with the Windows OS
+            and Unix-based operating systems.
+          </p>
+          <h2>How It works</h2>
+          <p>
+            Manterminal requires a user to enter an instruction in the
+            commands.txt file. Upon saving the file, the operating system
+            executes depending on how you fill in the parameters.
+          </p>
+          <strong>Prerequisites:</strong>
+          <p>One must run node.js 18.16.0 or later versions.</p>
+          <strong>Parameters for input in the commands.txt file.</strong>
+          <h3>&gt;_ mkfile</h3>
+          <p>
+            Creates a file in the file path that the user specifies. If the file
+            already exists, the operating system will through an error message
+            to the terminal.
+          </p>
+          <p><strong>Pattern:</strong> mkfile &lt;path&gt;</p>
+          <p>
+            <strong>Success Message:</strong> Creating file &lt;path&gt; was
+            successful…
+          </p>
+          <p>
+            <strong>Possible Error Message:</strong> The file &lt;path&gt;
+            already exists.
+          </p>
+
+          <h3>&gt;_ delfile</h3>
+          <p>
+            Deletes a file in the file path that the user specifies. If the file
+            does not exist, the operating system will through an error message
+            to the terminal.
+          </p>
+          <p><strong>Pattern:</strong> delfile &lt;path&gt;</p>
+          <p>
+            <strong>Success Message:</strong> Renaming &lt;old-path&gt; to
+            &lt;new-path&gt;.
+          </p>
+          <p>
+            <strong>Possible Error Message:</strong> Error: File &lt;path&gt;
+            does not exist.
+          </p>
+          <h3>&gt;_ appendfile</h3>
+          <p>
+            Enables the user to add content to a file path that a user
+            specifies. If the file does not exist, the operating system creates
+            a new file in that same path and adds the appended content.
+          </p>
+          <p>
+            <strong>Pattern:</strong> appendfile &lt;path&gt; this content:
+            &lt;content&gt;.
+          </p>
+          <p>
+            <strong>Success Message:</strong> Content added to the file
+            &lt;path&gt;.
+          </p>
+          <div class="notice">
+            <div class="side-margin"></div>
+            <strong>Important Note!</strong>
+            <p>
+              There is no Error message for this command. The error-handling
+              functionality for this instruction will be available in the next
+              release.
+            </p>
+          </div>
+          <h3>&gt;_ --help</h3>
+          <p>
+            The help command lists all the available instructions and their
+            purpose in case a user cannot remember them.
+          </p>
+          <p><strong>Pattern:</strong> --help</p>
+          <h2>Who is The Doc For?</h2>
+          <p>
+            This documentation is for individual programmers looking for
+            open-source projects to contribute. I manage Manterminal under the
+            MIT license, and all users have permission to share or reuse the
+            source code.
+          </p>
+        </div>
+        <div class="code-area"><p>here is my code</p></div>
+      </div>
+      <div class="div-sections">
+        <div class="content-area"></div>
+        <div class="code-area"></div>
+      </div>
+      <div class="div-sections">
+        <div class="content-area"></div>
+        <div class="code-area"></div>
+      </div>
+    </div>
+    <script src="../menu.js"></script>
+  </body>
+</html>

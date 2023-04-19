@@ -1,0 +1,57 @@
+.config-menu {
+  /* background: yellow; */
+  position: fixed;
+  width: 20vw;
+  max-height: 70vh;
+  top: 7.8rem;
+  /* padding: 1rem; */
+  margin: 0.4rem;
+  /* overflow-y: scroll; */
+}
+
+.toc-header {
+  position: sticky;
+  height: 100px;
+  top: -10px;
+  width: 100%;
+  background: gray;
+}
+
+.toc-header h1 {
+  text-align: center;
+  padding-top: 2rem;
+  color: whitesmoke;
+}
+
+.config-menu nav {
+  max-height: 70vh;
+  overflow-y: scroll;
+  padding: 2rem;
+}
+
+.main-content {
+  position: relative;
+  left: 21vw;
+  top: 13rem;
+  width: 78vw;
+  /* background-color: orange; */
+  min-height: 100vh;
+}
+
+.main-content .div-sections {
+  /* display: grid;
+  gap: 20px; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.content-area,
+.code-area {
+  padding: 1rem;
+}
+
+.code-area {
+  background-color: gray;
+  position: sticky;
+}
