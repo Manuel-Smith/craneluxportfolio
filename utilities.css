@@ -39,6 +39,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 3rem 1rem;
+  background: rgba(0, 0, 0, 0.068);
+  border-radius: 20px;
 }
 
 .header-holder .mini-menu,
@@ -331,8 +333,41 @@ footer p > span {
   color: rgb(180, 23, 70);
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 850px) {
+  .header-holder {
+    background: rgba(0, 0, 0, 0.404);
+  }
+
   .header-holder .menu {
-    left: calc(100% -50%);
+    left: 10rem;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header-holder .menu {
+    left: 0rem;
+    width: 100%;
+  }
+
+  .header-holder .mini-menu {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  main .hero-section .my-name {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  main .hero-section p {
+    font-size: 1rem;
+  }
+  main .hero-section .brief-me p {
+    font-size: 1rem;
+  }
+  .header-holder {
+    padding: 0;
+    width: 100vw;
   }
 }

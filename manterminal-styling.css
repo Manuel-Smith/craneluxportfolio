@@ -87,7 +87,6 @@
   padding: 2rem;
   border: solid 1px white;
   overflow: scroll;
-  max-height: 70vh;
 }
 .code-docs > code {
   overflow-x: scroll;
