@@ -170,17 +170,233 @@
             source code.
           </p>
         </div>
-        <div class="code-area"><p>here is my code</p></div>
+        <div class="code-area"><p></p></div>
       </div>
       <div class="div-sections">
-        <div class="content-area"></div>
+        <div class="content-area">
+          <h1>Node Installation</h1>
+          <p>
+            In your terminal, check if you already have Node.js installed on
+            your device using the command:
+          </p>
+          <div class="code-clip">
+            <button class="button-copy">
+              <span class="material-symbols-outlined"> content_copy </span>Copy
+              code
+            </button>
+            <pre>node --version</pre>
+          </div>
+          <p>
+            If the command line does not return any version number, then Node.js
+            is not installed on your device.
+          </p>
+          <p>
+            For Microsoft Windows users, Click Here to Download the Node.js
+            installer.
+          </p>
+          <p>For Linux users, run the command:</p>
+          <div class="code-clip">
+            <button class="button-copy">
+              <span class="material-symbols-outlined"> content_copy </span>Copy
+              code
+            </button>
+            <pre>sudo apt-get -y install nodejs</pre>
+          </div>
+          <p>
+            Node.js automatically installs the NPM. There is no need to install
+            the package manager separately.
+          </p>
+          <div class="notice">
+            <div class="side-margin"></div>
+            <strong>Important Note!</strong>
+            <p>
+              After installing node.js, clone this GitHub repository to acquire
+              the working files.
+            </p>
+          </div>
+          <h1>Requiring packages</h1>
+          <p>
+            In the app.js file, we start by Importing modules. This project
+            requires one custom and two Inbuilt Node.js modules:
+          </p>
+          <ol>
+            <li>
+              fs/promises - An asynchronous api that manages the file system and
+              its events.
+            </li>
+            <li>
+              path - An api that creates or resolves paths and directories.
+            </li>
+            <li>
+              operations module. The operations module is custom. This module
+              contains all the function definitions for handling input commands.
+            </li>
+          </ol>
+          <h1>Command Constants</h1>
+          <p>
+            To prevent the variables from polluting the global, we declare them
+            in an IIFE and store them in the IIFE's local scope.
+          </p>
+          <p>
+            The IIFE is an async function. In a minute, I’ll explain why to use
+            an async function. In the try block of the Async IIFE function, we
+            first declare constant variables. These are the input commands a
+            user enters in the commands.txt file.
+          </p>
+          <p>
+            Besides, we’ve also declared a variable commandFilePath. This
+            command specifies the file path of the commands.txt file.
+          </p>
+          <h1>Opening and Watching Test File.</h1>
+          <p>
+            To open the commands.txt file in memory with read-only permissions,
+            we use the await fs.open() method in the fs/promises module. This
+            method returns a promise that inherits from the FileHandle class.
+            The FileHandle class is an event emitter. We can take advantage of
+            methods like .on(), .emit(), .addEventListener(), etc.
+          </p>
+          <p>
+            The fs.watch() method tracks all the changes saved in the
+            commands.txt file. It returns an Async Iterator assigned to the
+            constant variable watcher. We iterate over this Async Iterator using
+            the await for...of loop to extract events.
+          </p>
+
+          <h1>commandFileHandler.on() Method.</h1>
+          <p>
+            Since the returned value stored in the commandFileHandler variable
+            inherits from the FileHandle class, we utilize event handlers like
+            .on() and .emit().
+          </p>
+          <p>
+            Therefore, we will call commandFileHandler.on() and pass in the
+            change event as the first parameter and a listener as an async
+            callback function for the 2nd parameter.
+          </p>
+          <h1>Memory Management</h1>
+          <p>
+            On opening the commands.txt file, we must read its data into memory.
+            However, Node.js is poor at managing memory, and we must configure
+            it ourselves. By default, Node.js preserves over 60000 bits to store
+            a data set that requires only a few bits.
+          </p>
+          <p>
+            A developer must explicitly define how much memory to use when
+            storing the read data on opening the commands.txt file.
+          </p>
+          <p>
+            Therefore, we dynamically assign memory size to a buffer size
+            variable on opening the commands.txt file.
+          </p>
+        </div>
         <div class="code-area"></div>
       </div>
       <div class="div-sections">
-        <div class="content-area"></div>
+        <div class="content-area">
+          <h1>Operations module</h1>
+          <p>
+            The operations module has five async functions. These functions
+            perform various independent tasks, and each call relies on the user
+            input in the commands.txt file. Below is an outline of what each
+            function definition does.
+          </p>
+          <h2>createFile()</h2>
+          <p>
+            This function takes one parameter, a file path. Then performs checks
+            to see if the file already exists. If the file exists, the operating
+            system will through an error message `The file &gt;path&gt; already
+            exists.` If it does not exist, it will create the file.
+          </p>
+          <p>
+            We check if the file exists by opening the path in read-only mode
+            using the fs.open(path, ‘r’) method with the flag ‘r’.
+          </p>
+          <p>
+            If the file does not exist, we create the file by opening the path
+            asynchronously in write mode using the fs.open(path, ‘w’) method
+            with the flag ‘w’.
+          </p>
+          <p>
+            Whenever you make an open system call, do not forget to close it.
+            Use the code:
+          </p>
+          <div class="code-clip">
+            <button class="button-copy">
+              <span class="material-symbols-outlined"> content_copy </span>Copy
+              code
+            </button>
+            <pre>await fs.close();</pre>
+          </div>
+
+          <h2>deleteFile</h2>
+          <p>
+            This function definition has one parameter, a file path. In the try
+            block, we asynchronously remove the file using the fs.unlink(path)
+            method.
+          </p>
+          <p>
+            If the path does not exist, The operating system will through an
+            error message.
+          </p>
+          <h2>renameFile()</h2>
+          <p>
+            The renameFile function takes two parameters, an old file path, and
+            a new file path. The new file path replaces the old one if it
+            exists. We use the fs.rename(oldPath, newPath) method.
+          </p>
+          <p>
+            If the file does not exist, the operating system will through an
+            error message.
+          </p>
+          <h2>addToFile()</h2>
+          <p>
+            The addToFile function takes two parameters, path and content
+            parameters. The content parameter takes the data the user enters and
+            adds it to the file path. If the file does not exist, the operating
+            system will create one and append the content.
+          </p>
+          <p>
+            We add this content using the method fs.appendFile(path, content).
+          </p>
+          <h2>helpGuide()</h2>
+          <p>This function definition logs all instructions a user needs.</p>
+          <h2>exporting module functions</h2>
+          <p>
+            We need all these modules in the app.js file. So, we use the
+            destructuring assignment to export all these functions.
+          </p>
+          <h1>Additional resources.</h1>
+          <p>Node.js documentation</p>
+          <p>Mozilla Developer Network</p>
+          <p>W3School</p>
+          <p>Geek For Geeks</p>
+        </div>
+
         <div class="code-area"></div>
       </div>
+      <footer id="footer-docs">
+        <h1>Manuel Smith</h1>
+        <p>
+          Technical Writer and Node.Js Developer:
+          <span
+            ><a href="mailto:manuel@cranelux.com">manuel@cranelux.com</a></span
+          >
+        </p>
+        <p><a href="#">Terms</a> | <a href="#">Privacy</a></p>
+        <p>
+          <a href="https://www.linkedin.com/in/manuel-smith/" target="_blank"
+            >Linkedin</a
+          >
+          |
+          <a href="https://github.com/Manuel-Smith" target="_blank">GitHub</a> |
+          <a href="https://www.codewars.com/users/Manuel-smith" target="_blank"
+            >CodeWars</a
+          >
+        </p>
+      </footer>
     </div>
+
     <script src="../menu.js"></script>
+    <script src="../copyClipboard.js"></script>
   </body>
 </html>

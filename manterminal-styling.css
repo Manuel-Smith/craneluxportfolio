@@ -1,7 +1,7 @@
 .config-menu {
   /* background: yellow; */
   position: fixed;
-  width: 20vw;
+  width: 16vw;
   max-height: 70vh;
   top: 7.8rem;
   /* padding: 1rem; */
@@ -14,7 +14,7 @@
   height: 100px;
   top: -10px;
   width: 100%;
-  background: gray;
+  background: rgb(35 54 89);
 }
 
 .toc-header h1 {
@@ -31,9 +31,9 @@
 
 .main-content {
   position: relative;
-  left: 21vw;
+  left: 17vw;
   top: 13rem;
-  width: 78vw;
+  width: 82vw;
   /* background-color: orange; */
   min-height: 100vh;
 }
@@ -52,6 +52,6 @@
 }
 
 .code-area {
-  background-color: gray;
+  background-color: rgb(35 54 89);
   position: sticky;
 }
