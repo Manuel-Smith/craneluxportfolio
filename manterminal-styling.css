@@ -67,6 +67,7 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .code-area > div > button span {
@@ -86,6 +87,7 @@
   padding: 2rem;
   border: solid 1px white;
   overflow: scroll;
+  max-height: 70vh;
 }
 .code-docs > code {
   overflow-x: scroll;
@@ -132,4 +134,5 @@
   top: 1rem;
   border-radius: 5px;
   left: 1rem;
+  z-index: 1;
 }
