@@ -42,7 +42,7 @@
   /* display: grid;
   gap: 20px; */
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 55% 45%;
   gap: 10px;
 }
 
@@ -52,6 +52,64 @@
 }
 
 .code-area {
-  background-color: rgb(35 54 89);
+  background-color: #343746;
   position: sticky;
+}
+
+.code-area > div {
+  position: relative;
+}
+.code-area > div > button {
+  top: 1rem;
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.code-area > div > button span {
+  color: rgba(180, 17, 99, 0.863);
+}
+
+.code-area > div > button:active {
+  background-color: rgba(128, 128, 128, 0.247);
+}
+
+#code-docs {
+  padding: 5px;
+  font-size: 12px;
+  background: #233659;
+  line-height: 1.2;
+  border-radius: 2px;
+  padding: 2rem;
+  border: solid 1px white;
+}
+#code-docs > code {
+  overflow-x: scroll;
+}
+
+#code-docs > code {
+  font-size: 1rem;
+  color: white;
+}
+
+#code-docs > code > .function {
+  color: #50d94b;
+}
+
+#code-docs > code > .declaratives {
+  color: #ff79c6;
+}
+
+#code-docs > code > .comments {
+  color: #58728b;
+}
+#code-docs > code > .string {
+  color: #f1fa76;
+}
+
+#code-docs > code > .const-vars {
+  color: #aaa7f8bb;
 }

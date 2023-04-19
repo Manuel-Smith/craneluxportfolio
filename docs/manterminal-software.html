@@ -290,121 +290,122 @@
           </p>
         </div>
         <div class="code-area">
-          <div class="code-clip">
+          <div>
             <button class="button-copy">
               <span class="material-symbols-outlined"> content_copy </span>Copy
               code
             </button>
-            <pre>
-const fs = require("node:fs/promises");
-const path = require("node:path");
-const {
-  addToFile,
-  renameFile,
-  deleteFile,
-  createFile,
-  helpGuide,
-} = require("./operations");
+            <pre id="code-docs">
+<code>
+<span class="declaratives">const</span> fs = <span class="function">require</span>("node:fs/promises");
+<span class="declaratives">const</span> <span class="const-vars">constpath</span> = <span class="function">require</span>("node:path");
+<span class="declaratives">const</span> {
+      <span class="function">addToFile</span>,
+      <span class="function">renameFile</span>,
+      <span class="function">deleteFile</span>,
+      <span class="function">helpGuide</span>,
+} = <span class="function">require</span>("./operations");
 
 (async function () {
   try {
-    // commands
-    const CREATE_FILE = "mkfile";
-    const DELETE_FILE = "delfile";
-    const RENAME_FILE = "renfile";
-    const ADD_TO_FILE = "appendfile";
-    const HELP = "--help";
+        <span class="comments">// commands</span>
+        <span class="declaratives">const</span> <span class="const-vars">CREATE_FILE</span> = <span class="string">"mkfile"</span>;
+        <span class="declaratives">const</span> <span class="const-vars">DELETE_FILE</span> = <span class="string">"delfile"</span>;
+        <span class="declaratives">const</span> <span class="const-vars">RENAME_FILE</span> = <span class="string">"renfile"</span>;
+        <span class="declaratives">const</span> <span class="const-vars">ADD_TO_FILE</span> = <span class="string">"appendfile"</span>;
+        <span class="declaratives">const</span> <span class="const-vars">HELP</span> = <span class="string">"--help"</span>;
 
-    // Specifying the name of the file path.
-    let commandFilePath = "./command.txt";
+        <span class="comments">// Specifying the name of the file path.</span>
+        <span class="declaratives">let</span> commandFilePath = <span class="string">"./command.txt"</span>;
 
-    const commandFileHandler = await fs.open(commandFilePath, "r");
+        <span class="declaratives">const</span> <span class="const-vars">commandFileHandler</span> = <span class="declaratives">await</span> fs.<span class="function">open</span>(commandFilePath, <span class="string">"r"</span>);
 
-    // A command for watching changes in the command.txt file
-    const watcher = fs.watch(commandFilePath);
+        <span class="comments">// A command for watching changes in the command.txt file</span>
+        <span class="declaratives">const</span> <span class="const-vars">watcher</span> = fs.<span class="function">watch</span>(commandFilePath);
 
-    commandFileHandler.on("change", async () => {
-      // We want to read the content of the file.
-      // First we define the size of the buffer to store.
-      const bufferSize = (await commandFileHandler.stat()).size;
+        <span class="const-vars">commandFileHandler</span>.<span class="function">on</span>(<span class="string">"change"</span>, async () => {
+              <span class="comments">// We want to read the content of the file.</span>
+              <span class="comments">// First we define the size of the buffer to store.</span>
+              <span class="declaratives">const</span> <span class="const-vars">bufferSize</span> = (<span class="declaratives">await</span> <span class="const-vars">commandFileHandler</span>.<span class="function">stat</span>()).size;
 
-      // Then defining parameters for reading the file
-      let buffer = Buffer.alloc(bufferSize);
-      let offset = 0;
-      let position = 0;
-      let contentLength = buffer.byteLength;
+              <span class="comments">// Then defining parameters for reading the file</span>
+              <span class="declaratives">let</span> buffer = Buffer.<span class="function">alloc</span>(<span class="const-vars">bufferSize</span>);
+              <span class="declaratives">let</span> offset = 0;
+              <span class="declaratives">let</span> position = 0;
+              <span class="declaratives">let</span> contentLength = buffer.<span class="const-vars">byteLength</span>;
 
-      // Reading all the content of the file into memory
-      await commandFileHandler.read(buffer, offset, contentLength, position);
+              <span class="comments">// Reading all the content of the file into memory</span>
+              <span class="declaratives">await</span> <span class="const-vars">commandFileHandler</span>.<span class="function">read</span>(buffer, offset, contentLength, position);
 
-      const command = buffer.toString("utf8");
+              <span class="declaratives">const</span> <span class="const-vars">command</span> = buffer.<span class="function">toString</span>(<span class="string">"utf8"</span>);
 
-      // Create a file:
-      // mkfile &lt;path&gt;
-      if (command.includes(CREATE_FILE)) {
-        const filePath = path.resolve(
-          command.substring(CREATE_FILE.length + 1)
-        );
-        createFile(filePath);
+              <span class="comments">// Create a file:</span>
+              <span class="comments">// mkfile &lt;path&gt;</span>
+              <span class="declaratives">if</span> (<span class="const-vars">command</span>.<span class="function">includes</span>(<span class="const-vars">CREATE_FILE</span>)) {
+                      <span class="declaratives">const</span> filePath = path.<span class="function">resolve</span>(
+                              command.<span class="function">substring</span>(<span class="const-vars">CREATE_FILE.length</span> + <span class="const-vars">1</span>)
+                      );
+                      <span class="function">createFile</span>(<span class="const-vars">filePath</span>);
+              }
+
+              <span class="comments">// Delete a file</span>
+              <span class="comments">// delfile &lt;path&gt;</span>
+              <span class="declaratives">else if</span> (<span class="const-vars">command</span>.<span class="function">includes</span>(<span class="const-vars">DELETE_FILE</span>)) {
+                      <span class="declaratives">const</span> filePath = path.<span class="function">resolve</span>(
+                              <span class="const-vars">command</span>.<span class="function">substring</span>(<span class="const-vars">DELETE_FILE.length</span> + <span class="const-vars">1</span>)
+                      );
+
+                <span class="function">deleteFile</span>(<span class="const-vars">filePath</span>);
+              }
+
+              <span class="comments">// rename a file</span>
+              <span class="comments">// renfile &lt;path&gt; to &lt;new-path&gt;</span>
+              <span class="declaratives">else if</span> (<span class="const-vars">command</span>.<span class="function">includes</span>(<span class="const-vars">RENAME_FILE</span>)) {
+                      <span class="declaratives">const</span> <span class="const-vars">_idx</span> = <span class="const-vars">command</span>.<span class="function">indexOf</span>(<span class="string">" to "</span>);
+                      <span class="declaratives">const</span> <span class="const-vars">oldFilePath</span> = <span class="const-vars">path</span>.<span class="function">resolve</span>(
+                              <span class="const-vars">command</span>.<span class="function">ubstring</span>(<span class="const-vars">RENAME_FILE.length</span> + <span class="const-vars">1</span>, <span class="const-vars">_idx</span>)
+                      );
+
+                      <span class="declaratives">const</span> newFilePath = <span class="const-vars">path</span>.<span class="function">resolve</span>(<span class="const-vars">command</span>.<span class="function">substring</span>(<span class="const-vars">_idx</span> + <span class="const-vars">4</span>));
+
+                      <span class="function">renameFile</span>(<span class="const-vars">oldFilePath</span>, <span class="const-vars">newFilePath</span>);
+              }
+
+              <span class="comments">// Requesting help</span>
+              <span class="comments">// --help</span>
+              <span class="declaratives">else if</span> (<span class="const-vars">command</span>.<span class="function">includes</span>(<span class="const-vars">HELP</span>)) {
+                      <span class="function">helpGuide</span>();
+              }
+
+              <span class="comments">// Add to file</span>
+              <span class="comments">// appendfile &lt;path&gt; this content: &lt;content&gt;</span>
+              <span class="declaratives">else if</span> (<span class="const-vars">command</span>.<span class="function">includes</span>(<span class="const-vars">ADD_TO_FILE</span>)) {
+                      <span class="declaratives">const</span> <span class="const-vars">_idx</span> = <span class="const-vars">command</span>.<span class="function">indexOf</span>(" this content: ");
+                      <span class="declaratives">const</span> <span class="const-vars">filePath</span> = <span class="const-vars">path</span>.<span class="function">resolve</span>(
+                              <span class="const-vars">command</span>.<span class="function">substring</span>(<span class="const-vars">ADD_TO_FILE.length</span> + <span class="const-vars">1</span>, <span class="const-vars">_idx</span>)
+                      );
+                      <span class="declaratives">const</span> <span class="const-vars">content</span> = <span class="const-vars">command</span>.<span class="function">substring</span>(<span class="const-vars">_idx</span> + <span class="const-vars">15</span>);
+
+                      <span class="function">addToFile</span>(<span class="const-vars">filePath</span>, <span class="const-vars">content</span>);
+                }
+
+              <span class="comments">// Command to handle invalid commands</span>
+              <span class="declaratives">else</span> {
+                      <span class="const-vars">console</span>.<span class="function">log</span>("\n" + <span class="string">"Invalid command: "</span> + <span class="const-vars">command</span>);
+                      <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">"For help: enter command --help"</span>);
+              }
+        });
+
+        <span class="declaratives">for await</span> (<span class="declaratives">const</span> <span class="const-vars">event</span> <span class="declaratives">of</span> <span class="const-vars">watcher</span>) {
+              <span class="declaratives">if</span> (<span class="const-vars">event</span>.eventType <span class="declaratives">===</span> "change") {
+              <span class="const-vars">commandFileHandler</span>.<span class="function">emit</span>("change");
+          }
+        }
+      } <span class="declaratives">catch</span> (error) {
+              <span class="const-vars">console</span>.<span class="function">log</span>(error.message);
       }
-
-      // Delete a file
-      // delfile &lt;path&gt;
-      else if (command.includes(DELETE_FILE)) {
-        const filePath = path.resolve(
-          command.substring(DELETE_FILE.length + 1)
-        );
-
-        deleteFile(filePath);
-      }
-
-      // rename a file
-      // renfile &lt;path&gt; to &lt;new-path&gt;
-      else if (command.includes(RENAME_FILE)) {
-        const _idx = command.indexOf(" to ");
-        const oldFilePath = path.resolve(
-          command.substring(RENAME_FILE.length + 1, _idx)
-        );
-        const newFilePath = path.resolve(command.substring(_idx + 4));
-
-        renameFile(oldFilePath, newFilePath);
-      }
-
-      // Requesting help
-      // --help
-      else if (command.includes(HELP)) {
-        helpGuide();
-      }
-
-      // Add to file
-      // appendfile &lt;path&gt; this content: &lt;content&gt;
-      else if (command.includes(ADD_TO_FILE)) {
-        const _idx = command.indexOf(" this content: ");
-        const filePath = path.resolve(
-          command.substring(ADD_TO_FILE.length + 1, _idx)
-        );
-        const content = command.substring(_idx + 15);
-
-        addToFile(filePath, content);
-      }
-
-      // Command to handle invalid commands
-      else {
-        console.log("\n" + "Invalid command: " + command);
-        console.log("For help: enter command --help");
-      }
-    });
-
-    for await (const event of watcher) {
-      if (event.eventType === "change") {
-        commandFileHandler.emit("change");
-      }
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-})();
-
+      })();
+</code>
             </pre>
           </div>
         </div>
@@ -491,12 +492,13 @@ const {
         </div>
 
         <div class="code-area">
-          <div class="code-clip">
+          <div>
             <button class="button-copy">
               <span class="material-symbols-outlined"> content_copy </span>Copy
               code
             </button>
-            <pre>
+            <pre id="code-docs">
+              <code>
 const fs = require("node:fs/promises");
 // Function for handling file creation.
 const createFile = async (path) => {
@@ -575,7 +577,7 @@ const helpGuide = () => {
 };
 
 module.exports = { createFile, deleteFile, renameFile, addToFile, helpGuide };
-
+</code>
             </pre>
           </div>
         </div>
