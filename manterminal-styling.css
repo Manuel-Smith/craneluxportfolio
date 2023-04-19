@@ -9,6 +9,17 @@
   /* overflow-y: scroll; */
 }
 
+.config-menu nav ul li {
+  list-style: none;
+  padding-top: 1rem;
+}
+
+.config-menu nav ul li a {
+  color: rgb(238, 178, 178);
+  border-bottom: none;
+  padding-bottom: 1rem;
+}
+
 .toc-header {
   position: sticky;
   height: 100px;
@@ -24,8 +35,9 @@
 }
 
 .config-menu nav {
+  background: #343746;
   max-height: 70vh;
-  overflow-y: scroll;
+  overflow: scroll;
   padding: 2rem;
 }
 

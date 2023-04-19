@@ -47,36 +47,54 @@
     <aside class="config-menu">
       <div class="toc-header"><h1>Guide</h1></div>
       <nav>
-        <p>Project Overview</p>
-        <p>What is Manterminal</p>
-        <p>How It works</p>
-        <p>&gt;_mkfile</p>
-        <p>&gt;_delfile</p>
-        <p>&gt;_renfile</p>
-        <p>&gt;_appendfile</p>
-        <p>&gt;_--help</p>
-        <p>Who Is the Doc For?</p>
-        <p>Node Installation</p>
-        <p>Importing Packages</p>
-        <p>Constant Variables</p>
-        <p>Opening and Watching the Test File</p>
-        <p>commandFileHandler.on() Method</p>
-        <p>Memory Management</p>
-        <p>Operations module</p>
-        <p>createFile</p>
-        <p>deleteFile</p>
-        <p>renameFile</p>
-        <p>addToFile</p>
-        <p>helpGuide</p>
-        <p>exporting module functions</p>
-        <p>Additional resources</p>
+        <ul>
+          <li>
+            <a href="#manterminal-overview">Project Overview - Manterminal</a>
+            <ul>
+              <li>
+                <a href="#manterminal-how-it-works">How It works</a>
+                <ul>
+                  <li><a href="#mkfile">&gt;_mkfile</a></li>
+                  <li><a href="#delfile">&gt;_delfile</a></li>
+                  <li><a href="#renfile">&gt;_renfile</a></li>
+                  <li><a href="#appendfile">&gt;_appendfile</a></li>
+                  <li><a href="#help-manterminal">&gt;_--help</a></li>
+                </ul>
+              </li>
+              <li><a href="#who-the-doc-for">Who Is the Doc For?</a></li>
+            </ul>
+          </li>
+          <li><a href="#node-installation">Node Installation</a></li>
+          <li><a href="#importing-packages">Importing Packages</a></li>
+          <li><a href="#command-constants">Constant Variables</a></li>
+          <li>
+            <a href="#watching-test-file">Opening and Watching the Test File</a>
+          </li>
+          <li><a href="#commandfile-on">commandFileHandler.on() Method</a></li>
+          <li><a href="#memory-management">Memory Management</a></li>
+          <li>
+            <a href="#operations-module">Operations module</a>
+            <ul>
+              <li><a href="#create-file">createFile</a></li>
+              <li><a href="#delete-file">deleteFile</a></li>
+              <li><a href="#rename-file">renameFile</a></li>
+              <li><a href="#add-to-file">addToFile</a></li>
+              <li><a href="#help-guide">helpGuide</a></li>
+              <li>
+                <a href="#exporting-module-functions"
+                  >exporting module functions</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li><a href="#additional-resources">Additional resources</a></li>
+        </ul>
       </nav>
     </aside>
     <div class="main-content">
       <div class="div-sections">
         <div class="content-area">
-          <h1>Project Overview</h1>
-          <h2>What is Manterminal?</h2>
+          <h1 id="manterminal-overview">Project Overview - Manterminal</h1>
           <p>
             Manterminal is a File System utility that emulates a command line
             interface. The purpose of this tool is to:
@@ -93,7 +111,7 @@
             making it the go-to command line tool compatible with the Windows OS
             and Unix-based operating systems.
           </p>
-          <h2>How It works</h2>
+          <h2 id="manterminal-how-it-works">How It works</h2>
           <p>
             Manterminal requires a user to enter an instruction in the
             commands.txt file. Upon saving the file, the operating system
@@ -102,7 +120,7 @@
           <strong>Prerequisites:</strong>
           <p>One must run node.js 18.16.0 or later versions.</p>
           <strong>Parameters for input in the commands.txt file.</strong>
-          <h3>&gt;_ mkfile</h3>
+          <h3 id="mkfile">&gt;_ mkfile</h3>
           <p>
             Creates a file in the file path that the user specifies. If the file
             already exists, the operating system will through an error message
@@ -118,7 +136,7 @@
             already exists.
           </p>
 
-          <h3>&gt;_ delfile</h3>
+          <h3 id="delfile">&gt;_ delfile</h3>
           <p>
             Deletes a file in the file path that the user specifies. If the file
             does not exist, the operating system will through an error message
@@ -133,7 +151,25 @@
             <strong>Possible Error Message:</strong> Error: File &lt;path&gt;
             does not exist.
           </p>
-          <h3>&gt;_ appendfile</h3>
+          <h3 id="renfile">&gt;_ renfile</h3>
+          <p>
+            Renames a file that already exists in the file path that a user
+            specifies. If the file you want to rename does not exist, the
+            operating system will through an error message in the terminal.
+          </p>
+          <p>
+            <strong>Pattern:</strong> renfile &lt;old-path&gt; to
+            &lt;new-path&gt;.
+          </p>
+          <p>
+            <strong>Success Message:</strong> Renaming &lt;old-path&gt; to
+            &lt;new-path&gt;.
+          </p>
+          <p>
+            <strong>Possible Error Message:</strong> Error: File &lt;path&gt;
+            does not exist.
+          </p>
+          <h3 id="appendfile">&gt;_ appendfile</h3>
           <p>
             Enables the user to add content to a file path that a user
             specifies. If the file does not exist, the operating system creates
@@ -156,13 +192,13 @@
               release.
             </p>
           </div>
-          <h3>&gt;_ --help</h3>
+          <h3 id="help-manterminal">&gt;_ --help</h3>
           <p>
             The help command lists all the available instructions and their
             purpose in case a user cannot remember them.
           </p>
           <p><strong>Pattern:</strong> --help</p>
-          <h2>Who is The Doc For?</h2>
+          <h2 id="who-the-doc-for">Who is The Doc For?</h2>
           <p>
             This documentation is for individual programmers looking for
             open-source projects to contribute. I manage Manterminal under the
@@ -170,13 +206,10 @@
             source code.
           </p>
         </div>
-        <div class="code-area">
-          <video src=""></video>
-        </div>
       </div>
       <div class="div-sections">
         <div class="content-area">
-          <h1>Node Installation</h1>
+          <h1 id="node-installation">Node Installation</h1>
           <p>
             In your terminal, check if you already have Node.js installed on
             your device using the command:
@@ -216,7 +249,7 @@
               the working files.
             </p>
           </div>
-          <h1>Requiring packages</h1>
+          <h1 id="importing-packages">Importing packages</h1>
           <p>
             In the app.js file, we start by Importing modules. This project
             requires one custom and two Inbuilt Node.js modules:
@@ -234,7 +267,7 @@
               contains all the function definitions for handling input commands.
             </li>
           </ol>
-          <h1>Command Constants</h1>
+          <h1 id="command-constants">Constant Variables</h1>
           <p>
             To prevent the variables from polluting the global, we declare them
             in an IIFE and store them in the IIFE's local scope.
@@ -249,7 +282,7 @@
             Besides, we’ve also declared a variable commandFilePath. This
             command specifies the file path of the commands.txt file.
           </p>
-          <h1>Opening and Watching The Test File.</h1>
+          <h1 id="watching-test-file">Opening and Watching The Test File.</h1>
           <p>
             To open the commands.txt file in memory with read-only permissions,
             we use the await fs.open() method in the fs/promises module. This
@@ -264,7 +297,7 @@
             the await for...of loop to extract events.
           </p>
 
-          <h1>commandFileHandler.on() Method.</h1>
+          <h1 id="commandfile-on">commandFileHandler.on() Method.</h1>
           <p>
             Since the returned value stored in the commandFileHandler variable
             inherits from the FileHandle class, we utilize event handlers like
@@ -275,7 +308,7 @@
             change event as the first parameter and a listener as an async
             callback function for the 2nd parameter.
           </p>
-          <h1>Memory Management</h1>
+          <h1 id="memory-management">Memory Management</h1>
           <p>
             On opening the commands.txt file, we must read its data into memory.
             However, Node.js is poor at managing memory, and we must configure
@@ -415,14 +448,14 @@
       </div>
       <div class="div-sections">
         <div class="content-area">
-          <h1>Operations module</h1>
+          <h1 id="operations-module">Operations module</h1>
           <p>
             The operations module has five async functions. These functions
             perform various independent tasks, and each call relies on the user
             input in the commands.txt file. Below is an outline of what each
             function definition does.
           </p>
-          <h2>createFile()</h2>
+          <h2 id="create-file">createFile()</h2>
           <p>
             This function takes one parameter, a file path. Then performs checks
             to see if the file already exists. If the file exists, the operating
@@ -450,7 +483,7 @@
             <pre>await fs.close();</pre>
           </div>
 
-          <h2>deleteFile</h2>
+          <h2 id="delete-file">deleteFile</h2>
           <p>
             This function definition has one parameter, a file path. In the try
             block, we asynchronously remove the file using the fs.unlink(path)
@@ -460,7 +493,7 @@
             If the path does not exist, The operating system will through an
             error message.
           </p>
-          <h2>renameFile()</h2>
+          <h2 id="rename-file">renameFile()</h2>
           <p>
             The renameFile function takes two parameters, an old file path, and
             a new file path. The new file path replaces the old one if it
@@ -470,7 +503,7 @@
             If the file does not exist, the operating system will through an
             error message.
           </p>
-          <h2>addToFile()</h2>
+          <h2 id="add-to-file">addToFile()</h2>
           <p>
             The addToFile function takes two parameters, path and content
             parameters. The content parameter takes the data the user enters and
@@ -480,14 +513,14 @@
           <p>
             We add this content using the method fs.appendFile(path, content).
           </p>
-          <h2>helpGuide()</h2>
+          <h2 id="help-guide">helpGuide()</h2>
           <p>This function definition logs all instructions a user needs.</p>
-          <h2>exporting module functions</h2>
+          <h2 id="exporting-module-functions">exporting module functions</h2>
           <p>
             We need all these modules in the app.js file. So, we use the
             destructuring assignment to export all these functions.
           </p>
-          <h1>Additional resources.</h1>
+          <h1 id="additional-resources">Additional resources.</h1>
           <p>Node.js documentation</p>
           <p>Mozilla Developer Network</p>
           <p>W3School</p>
