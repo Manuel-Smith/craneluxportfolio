@@ -113,3 +113,7 @@
 #code-docs > code > .const-vars {
   color: #aaa7f8bb;
 }
+
+#code-docs > code > .params {
+  color: #ffc88ad7;
+}
