@@ -295,7 +295,8 @@
               <span class="material-symbols-outlined"> content_copy </span>Copy
               code
             </button>
-            <pre id="code-docs">
+            <span class="identifier">app.js</span>
+            <pre class="code-docs">
 <code>
 <span class="declaratives">const</span> fs = <span class="function">require</span>("node:fs/promises");
 <span class="declaratives">const</span> <span class="const-vars">constpath</span> = <span class="function">require</span>("node:path");
@@ -497,81 +498,82 @@
               <span class="material-symbols-outlined"> content_copy </span>Copy
               code
             </button>
-            <pre id="code-docs">
+            <span class="identifier">operations.js</span>
+            <pre class="code-docs">
               <code>
 <span class="declaratives">const</span> fs = <span class="function">require</span>(<span class="string">"node:fs/promises"</span>);
 <span class="comments">// Function for handling file creation.</span>
 <span class="declaratives">const</span> <span class="function">createFile</span> = <span class="declaratives">async</span> (<span class="params">path</span>) => {
-  <span class="declaratives">try {</span>
-    <span class="comments">// Checking whether we already have that file or not.</span>
-    <span class="declaratives">const</span> <span class="const-vars">isFileExisting</span> = <span class="declaratives">await</span> fs.<span class="function">open</span>(<span class="params">path</span>, <span class="string">"r"</span>);
-    <span class="const-vars">isFileExisting</span>.<span class="function">close</span>();
-    <span class="declaratives">return</span> <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`The file ${</span>path<span class="string">} already exists.</span> <span class="declaratives">\n</span>`);
-  } <span class="declaratives">catch</span> (err) {
-    <span class="declaratives">const</span> <span class="const-vars">newFileHandle</span> = <span class="declaratives">await</span> fs.<span class="function">open</span>(<span class="params">path</span>, "<span class="string">w"</span>);
-    <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Creating file ${</span>path<span class="string">} was successful...</span> <span class="declaratives">\n</span>`);
-    <span class="const-vars">newFileHandle</span>.<span class="function">close</span>();
-  }
+        <span class="declaratives">try {</span>
+                <span class="comments">// Checking whether we already have that file or not.</span>
+                <span class="declaratives">const</span> <span class="const-vars">isFileExisting</span> = <span class="declaratives">await</span> fs.<span class="function">open</span>(<span class="params">path</span>, <span class="string">"r"</span>);
+                <span class="const-vars">isFileExisting</span>.<span class="function">close</span>();
+                <span class="declaratives">return</span> <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`The file ${</span>path<span class="string">} already exists.</span> <span class="declaratives">\n</span>`);
+          } <span class="declaratives">catch</span> (err) {
+                <span class="declaratives">const</span> <span class="const-vars">newFileHandle</span> = <span class="declaratives">await</span> fs.<span class="function">open</span>(<span class="params">path</span>, "<span class="string">w"</span>);
+                <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Creating file ${</span>path<span class="string">} was successful...</span> <span class="declaratives">\n</span>`);
+                <span class="const-vars">newFileHandle</span>.<span class="function">close</span>();
+            }
 };
 
 <span class="comments">// Function for handling file deletion</span>
 <span class="declaratives">const</span> <span class="function">deleteFile</span> = <span class="declaratives">async</span> (<span class="params">path</span>) => {
-  <span class="declaratives">try {</span>
-    <span class="declaratives">await</span> fs.<span class="function">unlink</span>(<span class="params">path</span>);
-    <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`File ${</span><span class="params">path</span><span class="string">} was deleted...</span> <span class="declaratives">\n</span>`);
-  } <span class="declaratives">catch</span> (err) {
-    if (err.code === <span class="string">"ENOENT"</span>) {
-      <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Error: File ${</span><span class="params">path</span><span class="string">} does not exist...</span> <span class="declaratives">\n`</span>);
-    }
-  }
+        <span class="declaratives">try {</span>
+                <span class="declaratives">await</span> fs.<span class="function">unlink</span>(<span class="params">path</span>);
+                <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`File ${</span><span class="params">path</span><span class="string">} was deleted...</span> <span class="declaratives">\n</span>`);
+        } <span class="declaratives">catch</span> (err) {
+                if (err.code === <span class="string">"ENOENT"</span>) {
+                        <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Error: File ${</span><span class="params">path</span><span class="string">} does not exist...</span> <span class="declaratives">\n`</span>);
+                }
+          }
 };
 
 <span class="comments">// Function for renaming a file</span>
 <span class="declaratives">const</span> <span class="function">renameFile</span> = <span class="declaratives">async</span> (<span class="params">oldPath</span>, <span class="params">newPath</span>) => {
-  <span class="declaratives">try {</span>
-    <span class="declaratives">await</span> fs.<span class="function">rename</span>(<span class="params">oldPath</span>, <span class="params">newPath</span>);
-    <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Renaming ${</span><span class="params">oldPath</span><span class="string">} to ${</span><span class="params">newPath</span><span class="string">}</span> <span class="declaratives">\n</span>`);
-  } <span class="declaratives">catch</span> (err) {
-    if (err.code === <span class="string">"ENOENT"</span>) {
-      <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Error: File ${</span>oldPath<span class="string">} does not exist...</span> <span class="declaratives">\n</span>`);
-    }
-  }
+        <span class="declaratives">try {</span>
+                <span class="declaratives">await</span> fs.<span class="function">rename</span>(<span class="params">oldPath</span>, <span class="params">newPath</span>);
+                <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Renaming ${</span><span class="params">oldPath</span><span class="string">} to ${</span><span class="params">newPath</span><span class="string">}</span> <span class="declaratives">\n</span>`);
+        } <span class="declaratives">catch</span> (err) {
+                if (err.code === <span class="string">"ENOENT"</span>) {
+                        <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Error: File ${</span>oldPath<span class="string">} does not exist...</span> <span class="declaratives">\n</span>`);
+                }
+          }
 };
 
 <span class="comments">// Function for adding content to a file</span>
 <span class="declaratives">const</span> <span class="function">addToFile</span> = <span class="declaratives">async</span> (<span class="params">path</span>, <span class="params">content</span>) => {
-  <span class="declaratives">try {</span>
-    <span class="declaratives">if</span> (<span class="params">path</span>) {
-      <span class="declaratives">await</span> fs.<span class="function">appendFile</span>(<span class="params">path</span>, <span class="string">`${</span><span class="params">content</span><span class="string">}</span><span class="declaratives">\n</span>`);
-      <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Content was added to file ${</span><span class="params">path</span><span class="string">}</span> <span class="declaratives">\n</span>`);
-    }
-  } <span class="declaratives">catch</span> (err) {
-    <span class="const-vars">console</span>.<span class="function">log</span>(err.message + "<span class="declaratives">\n</span>");
-  }
+        <span class="declaratives">try {</span>
+                <span class="declaratives">if</span> (<span class="params">path</span>) {
+                        <span class="declaratives">await</span> fs.<span class="function">appendFile</span>(<span class="params">path</span>, <span class="string">`${</span><span class="params">content</span><span class="string">}</span><span class="declaratives">\n</span>`);
+                        <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`Content was added to file ${</span><span class="params">path</span><span class="string">}</span> <span class="declaratives">\n</span>`);
+                }
+        } <span class="declaratives">catch</span> (err) {
+                <span class="const-vars">console</span>.<span class="function">log</span>(err.message + "<span class="declaratives">\n</span>");
+        }
 };
 
 <span class="declaratives">const</span> <span class="function">helpGuide</span> = () => {
-  <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`
-  COMMANDS
+      <span class="const-vars">console</span>.<span class="function">log</span>(<span class="string">`
+      COMMANDS
+      
+      1. --help:                                          Displays the help menu.
   
-  1. --help:                                          Displays the help menu.
-  
-  2. renfile &lt;path&gt; to &lt;new-path&gt;:-               Give a new name to a file
-                                                      (renaming a file.)
+      2. renfile &lt;path&gt; to &lt;new-path&gt;:-               Give a new name to a file
+                                                         (renaming a file.)
 
-  3. delfile &lt;path&gt;:-                             remove an existing file.
-                                                      If a file does not exist, an 
-                                                      error will be shown
+      3. delfile &lt;path&gt;:-                             remove an existing file.
+                                                          If a file does not exist, an 
+                                                          error will be shown
 
-  4. mkfile &lt;path&gt;:-                             create a new file.
-                                                      If the file name already exists,
-                                                      an error will be thrown.
+      4. mkfile &lt;path&gt;:-                             create a new file.
+                                                          If the file name already exists,
+                                                          an error will be thrown.
                                       
-  5. appendfile &lt;path&gt; this content: &lt;content&gt;:      Add content specified in the
-                                                      content flag to the specified
-                                                      file path.
+      5. appendfile &lt;path&gt; this content: &lt;content&gt;:      Add content specified in the
+                                                          content flag to the specified
+                                                          file path.
 
-  NOTE: For command 5, if the specified file does not exist, a new one will be created.                                                       
+      NOTE: For command 5, if the specified file does not exist, a new one will be created.                                                       
   `</span>);
   <span class="declaratives">return</span> <span class="const-vars">0</span>;
 };
