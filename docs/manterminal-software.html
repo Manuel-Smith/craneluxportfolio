@@ -170,7 +170,7 @@
             source code.
           </p>
         </div>
-        <div class="code-area"><p></p></div>
+        <div class="code-area"></div>
       </div>
       <div class="div-sections">
         <div class="content-area">
@@ -289,7 +289,125 @@
             variable on opening the commands.txt file.
           </p>
         </div>
-        <div class="code-area"></div>
+        <div class="code-area">
+          <div class="code-clip">
+            <button class="button-copy">
+              <span class="material-symbols-outlined"> content_copy </span>Copy
+              code
+            </button>
+            <pre>
+const fs = require("node:fs/promises");
+const path = require("node:path");
+const {
+  addToFile,
+  renameFile,
+  deleteFile,
+  createFile,
+  helpGuide,
+} = require("./operations");
+
+(async function () {
+  try {
+    // commands
+    const CREATE_FILE = "mkfile";
+    const DELETE_FILE = "delfile";
+    const RENAME_FILE = "renfile";
+    const ADD_TO_FILE = "appendfile";
+    const HELP = "--help";
+
+    // Specifying the name of the file path.
+    let commandFilePath = "./command.txt";
+
+    const commandFileHandler = await fs.open(commandFilePath, "r");
+
+    // A command for watching changes in the command.txt file
+    const watcher = fs.watch(commandFilePath);
+
+    commandFileHandler.on("change", async () => {
+      // We want to read the content of the file.
+      // First we define the size of the buffer to store.
+      const bufferSize = (await commandFileHandler.stat()).size;
+
+      // Then defining parameters for reading the file
+      let buffer = Buffer.alloc(bufferSize);
+      let offset = 0;
+      let position = 0;
+      let contentLength = buffer.byteLength;
+
+      // Reading all the content of the file into memory
+      await commandFileHandler.read(buffer, offset, contentLength, position);
+
+      const command = buffer.toString("utf8");
+
+      // Create a file:
+      // mkfile &lt;path&gt;
+      if (command.includes(CREATE_FILE)) {
+        const filePath = path.resolve(
+          command.substring(CREATE_FILE.length + 1)
+        );
+        createFile(filePath);
+      }
+
+      // Delete a file
+      // delfile &lt;path&gt;
+      else if (command.includes(DELETE_FILE)) {
+        const filePath = path.resolve(
+          command.substring(DELETE_FILE.length + 1)
+        );
+
+        deleteFile(filePath);
+      }
+
+      // rename a file
+      // renfile &lt;path&gt; to &lt;new-path&gt;
+      else if (command.includes(RENAME_FILE)) {
+        const _idx = command.indexOf(" to ");
+        const oldFilePath = path.resolve(
+          command.substring(RENAME_FILE.length + 1, _idx)
+        );
+        const newFilePath = path.resolve(command.substring(_idx + 4));
+
+        renameFile(oldFilePath, newFilePath);
+      }
+
+      // Requesting help
+      // --help
+      else if (command.includes(HELP)) {
+        helpGuide();
+      }
+
+      // Add to file
+      // appendfile &lt;path&gt; this content: &lt;content&gt;
+      else if (command.includes(ADD_TO_FILE)) {
+        const _idx = command.indexOf(" this content: ");
+        const filePath = path.resolve(
+          command.substring(ADD_TO_FILE.length + 1, _idx)
+        );
+        const content = command.substring(_idx + 15);
+
+        addToFile(filePath, content);
+      }
+
+      // Command to handle invalid commands
+      else {
+        console.log("\n" + "Invalid command: " + command);
+        console.log("For help: enter command --help");
+      }
+    });
+
+    for await (const event of watcher) {
+      if (event.eventType === "change") {
+        commandFileHandler.emit("change");
+      }
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
+
+            </pre>
+          </div>
+        </div>
       </div>
       <div class="div-sections">
         <div class="content-area">
@@ -372,7 +490,95 @@
           <p>Geek For Geeks</p>
         </div>
 
-        <div class="code-area"></div>
+        <div class="code-area">
+          <div class="code-clip">
+            <button class="button-copy">
+              <span class="material-symbols-outlined"> content_copy </span>Copy
+              code
+            </button>
+            <pre>
+const fs = require("node:fs/promises");
+// Function for handling file creation.
+const createFile = async (path) => {
+  try {
+    // Checking whether we already have that file or not.
+    const isFileExisting = await fs.open(path, "r");
+    isFileExisting.close();
+    return console.log(`The file ${path} already exists. \n`);
+  } catch (err) {
+    const newFileHandle = await fs.open(path, "w");
+    console.log(`Creating file ${path} was successful... \n`);
+    newFileHandle.close();
+  }
+};
+
+// Function for handling file deletion
+const deleteFile = async (path) => {
+  try {
+    await fs.unlink(path);
+    console.log(`File ${path} was deleted... \n`);
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      console.log(`Error: File ${path} does not exist... \n`);
+    }
+  }
+};
+
+// Function for renaming a file
+const renameFile = async (oldPath, newPath) => {
+  try {
+    await fs.rename(oldPath, newPath);
+    console.log(`Renaming ${oldPath} to ${newPath} \n`);
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      console.log(`Error: File ${oldPath} does not exist... \n`);
+    }
+  }
+};
+
+// Function for adding content to a file
+const addToFile = async (path, content) => {
+  try {
+    if (path) {
+      await fs.appendFile(path, `${content}\n`);
+      console.log(`Content was added to file ${path} \n`);
+    }
+  } catch (err) {
+    console.log(err.message + "\n");
+  }
+};
+
+const helpGuide = () => {
+  console.log(`
+  COMMANDS
+  
+  1. --help:                     Displays the help menu.
+  
+  2. renfile &gt;path&gt; to &gt;new-path&gt;:-   Give a new name to a file
+                                                      (renaming a file.)
+
+  3. delfile &gt;path&gt;:-         remove an existing file.
+                                    If a file does not exist, an 
+                                    error will be shown
+
+  4. mkfile &gt;path&gt;:-          create a new file.
+                                    If the file name already exists,
+                                    an error will be thrown.
+                                      
+  5. appendfile &gt;path&gt; this content: &gt;content&gt;:      Add content specified in the
+                                    content flag to the specified
+                                    file path.
+
+  NOTE: For command 5, if the specified file does not exist, a new one will be created.                                                    
+  `);
+  return 0;
+};
+
+module.exports = { createFile, deleteFile, renameFile, addToFile, helpGuide };
+
+            </pre>
+          </div>
+        </div>
       </div>
       <footer id="footer-docs">
         <h1>Manuel Smith</h1>
