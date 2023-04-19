@@ -342,18 +342,6 @@ footer p > span {
     left: 10rem;
     width: 100%;
   }
-}
-
-@media screen and (max-width: 500px) {
-  .header-holder .menu {
-    left: 0rem;
-    width: 100%;
-  }
-
-  .header-holder .mini-menu {
-    flex-direction: column;
-    gap: 2px;
-  }
 
   main .hero-section .my-name {
     font-size: 2rem;
@@ -369,5 +357,25 @@ footer p > span {
   .header-holder {
     padding: 0;
     width: 100vw;
+  }
+  main .hero-section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  main .resource-tracker {
+    top: 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header-holder .menu {
+    left: 0rem;
+    width: 100%;
+  }
+
+  .header-holder .mini-menu {
+    flex-direction: column;
+    gap: 2px;
   }
 }
