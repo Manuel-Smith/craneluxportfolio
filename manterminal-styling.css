@@ -1,7 +1,7 @@
 .config-menu {
   /* background: yellow; */
   position: fixed;
-  width: 16vw;
+  width: 23vw;
   max-height: 70vh;
   top: 7.8rem;
   /* padding: 1rem; */
@@ -38,21 +38,19 @@
   background: #343746;
   max-height: 70vh;
   overflow: scroll;
-  padding: 2rem;
+  padding: 1rem;
+  margin-bottom: 20rem;
 }
 
 .main-content {
   position: relative;
-  left: 17vw;
+  left: 25vw;
   top: 13rem;
   width: 82vw;
-  /* background-color: orange; */
   min-height: 100vh;
 }
 
 .main-content .div-sections {
-  /* display: grid;
-  gap: 20px; */
   display: grid;
   grid-template-columns: 55% 45%;
   gap: 10px;
@@ -146,4 +144,33 @@
   border-radius: 5px;
   left: 1rem;
   z-index: 1;
+}
+
+@media screen and (max-width: 1300px) {
+  .config-menu {
+    display: none;
+  }
+  .main-content {
+    left: 5rem;
+  }
+
+  .main-content .div-sections {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .main-content .div-sections {
+    grid-template-columns: 40% 60%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main-content .div-sections {
+    display: flex;
+  }
 }
