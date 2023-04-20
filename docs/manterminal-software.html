@@ -99,8 +99,12 @@
         <div class="content-area">
           <h1 id="manterminal-overview">Project Overview - Manterminal</h1>
           <p>
-            Manterminal is a File System utility that emulates a command line
-            interface. The purpose of this tool is to:
+            Manterminal is a
+            <a href="https://en.wikipedia.org/wiki/File_system" target="_blank"
+              >File System</a
+            >
+            utility that emulates a command line interface. The purpose of this
+            tool is to:
           </p>
           <ol>
             <li>Create files</li>
@@ -111,23 +115,43 @@
           <p>
             Manterminal is a personal project, and I am working diligently to
             add more functionality. With time, I will add a User-friendly CLI,
-            making it the go-to command line tool compatible with the Windows OS
-            and Unix-based operating systems.
+            making it the go-to
+            <a
+              href="https://www.computerhope.com/jargon/c/commandi.htm"
+              target="_blank"
+              >command line</a
+            >
+            tool compatible with the Windows OS and Unix-based operating
+            systems.
           </p>
           <h2 id="manterminal-how-it-works">How It works</h2>
           <p>
             Manterminal requires a user to enter an instruction in the
-            commands.txt file. Upon saving the file, the operating system
-            executes depending on how you fill in the parameters.
+            commands.txt file. Upon saving the file, the
+            <a
+              href="https://www.mygreatlearning.com/blog/what-is-operating-system/"
+              target="_blank"
+              >operating system</a
+            >
+            executes the input parameters.
           </p>
           <strong>Prerequisites:</strong>
-          <p>One must run node.js 18.16.0 or later versions.</p>
+          <p>
+            One must run
+            <a href="https://nodejs.org/en" target="_blank">Node.js</a> 18.16.0
+            or later versions.
+          </p>
           <strong>Parameters for input in the commands.txt file.</strong>
           <h3 id="mkfile">&gt;_ mkfile</h3>
           <p>
-            Creates a file in the file path that the user specifies. If the file
-            already exists, the operating system will through an error message
-            to the terminal.
+            Creates a file in the
+            <a
+              href="https://docs.oracle.com/javase/tutorial/essential/io/path.html"
+              target="_blank"
+              >file path</a
+            >
+            that the user specifies. If the file already exists, the operating
+            system will through an error message to the terminal.
           </p>
           <p><strong>Pattern:</strong> mkfile &lt;path&gt;</p>
           <p>
@@ -147,8 +171,7 @@
           </p>
           <p><strong>Pattern:</strong> delfile &lt;path&gt;</p>
           <p>
-            <strong>Success Message:</strong> Renaming &lt;old-path&gt; to
-            &lt;new-path&gt;.
+            <strong>Success Message:</strong> File &lt;path&gt; was deleted…
           </p>
           <p>
             <strong>Possible Error Message:</strong> Error: File &lt;path&gt;
@@ -190,7 +213,12 @@
             <div class="side-margin"></div>
             <strong>Important Note!</strong>
             <p>
-              There is no Error message for this command. The error-handling
+              There is no Error message for this command. The
+              <a
+                href="https://www.techopedia.com/definition/16626/error-handling"
+                target="_blank"
+                >error-handling</a
+              >
               functionality for this instruction will be available in the next
               release.
             </p>
@@ -203,10 +231,18 @@
           <p><strong>Pattern:</strong> --help</p>
           <h2 id="who-the-doc-for">Who is The Doc For?</h2>
           <p>
-            This documentation is for individual programmers looking for
+            This documentation is for individual developers looking for
             open-source projects to contribute. I manage Manterminal under the
-            MIT license, and all users have permission to share or reuse the
-            source code.
+            <a
+              href="https://www.tldrlegal.com/license/mit-license"
+              target="_blank"
+              >MIT license</a
+            >, and all users have permission to share or reuse the
+            <a
+              href="https://www.techopedia.com/definition/547/source-code"
+              target="_blank"
+              >source code</a
+            >.
           </p>
         </div>
       </div>
@@ -225,12 +261,17 @@
             <pre>node --version</pre>
           </div>
           <p>
-            If the command line does not return any version number, then Node.js
-            is not installed on your device.
+            If the command line does not return any
+            <a
+              href="https://www.techtarget.com/searchsoftwarequality/definition/versioning"
+              target="_blank"
+              >version number</a
+            >, then Node.js is not installed on your device.
           </p>
           <p>
-            For Microsoft Windows users, Click Here to Download the Node.js
-            installer.
+            For Microsoft Windows users, Click
+            <a href="https://nodejs.org/en" target="_blank">Here</a> to Download
+            the Node.js installer.
           </p>
           <p>For Linux users, run the command:</p>
           <div class="code-clip">
@@ -242,14 +283,25 @@
           </div>
           <p>
             Node.js automatically installs the NPM. There is no need to install
-            the package manager separately.
+            the
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Package_management"
+              target="_blank"
+              >package manager</a
+            >
+            separately.
           </p>
           <div class="notice">
             <div class="side-margin"></div>
             <strong>Important Note!</strong>
             <p>
-              After installing node.js, clone this GitHub repository to acquire
-              the working files.
+              After installing Node.js, clone this
+              <a
+                href="https://github.com/Manuel-Smith/File-system-node.js.git"
+                target="_blank"
+                >GitHub repository</a
+              >
+              to acquire the working files.
             </p>
           </div>
           <h1 id="importing-packages">Importing packages</h1>
@@ -259,72 +311,127 @@
           </p>
           <ol>
             <li>
-              fs/promises - An asynchronous api that manages the file system and
-              its events.
+              <strong>fs/promises</strong> - An
+              <a
+                href="https://blog.postman.com/understanding-asynchronous-apis/#:~:text=Asynchronous%20APIs%20allow%20you%20to,every%20time%20you%20need%20data."
+                target="_blank"
+                >asynchronous api</a
+              >
+              that manages the file system and its events.
             </li>
             <li>
-              path - An api that creates or resolves paths and directories.
+              <strong>path</strong> - An api that creates or resolves paths and
+              directories.
             </li>
             <li>
-              operations module. The operations module is custom. This module
-              contains all the function definitions for handling input commands.
+              <strong>operations</strong> - The operations module is custom.
+              This module contains all the function definitions for handling
+              input commands.
             </li>
           </ol>
           <h1 id="command-constants">Constant Variables</h1>
           <p>
             To prevent the variables from polluting the global, we declare them
-            in an IIFE and store them in the IIFE's local scope.
+            in an IIFE's
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Glossary/Local_scope"
+              target="_blank"
+              >local scope</a
+            >.
           </p>
           <p>
-            The IIFE is an async function. In a minute, I’ll explain why to use
-            an async function. In the try block of the Async IIFE function, we
-            first declare constant variables. These are the input commands a
-            user enters in the commands.txt file.
+            The
+            <a
+              href="https://javascript.plainenglish.io/https-medium-com-javascript-in-plain-english-stop-feeling-iffy-about-using-an-iife-7b0292aba174?gi=87784936b426"
+              target="_parent"
+              >IIFE</a
+            >
+            we’ve used in this project is an async function. In a minute, I’ll
+            explain why to use an async function. In the try block of the Async
+            IIFE function, we first declare constant variables. These are the
+            input commands a user enters in the commands.txt file.
           </p>
           <p>
-            Besides, we’ve also declared a variable commandFilePath. This
-            command specifies the file path of the commands.txt file.
+            Besides, we’ve also declared a variable
+            <strong>commandFilePath</strong>. This command specifies the file
+            path of the commands.txt file.
           </p>
           <h1 id="watching-test-file">Opening and Watching The Test File.</h1>
           <p>
             To open the commands.txt file in memory with read-only permissions,
-            we use the await fs.open() method in the fs/promises module. This
-            method returns a promise that inherits from the FileHandle class.
-            The FileHandle class is an event emitter. We can take advantage of
-            methods like .on(), .emit(), .addEventListener(), etc.
+            we use the <strong>await fs.open()</strong> method. This method
+            returns a
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              target="_blank"
+              >promise</a
+            >
+            that inherits from the
+            <a
+              href="https://nodejs.org/api/fs.html#class-filehandle"
+              target="_blank"
+              >FileHandle</a
+            >
+            class. The FileHandle class is an
+            <a
+              href="https://nodejs.dev/en/learn/the-nodejs-event-emitter/"
+              target="_blank"
+              >Event emitter</a
+            >. We can take advantage of methods like <strong>.on()</strong>,
+            <strong>.emit()</strong>, <strong>.addEventListener()</strong>, etc.
           </p>
           <p>
             The fs.watch() method tracks all the changes saved in the
-            commands.txt file. It returns an Async Iterator assigned to the
-            constant variable watcher. We iterate over this Async Iterator using
-            the await for...of loop to extract events.
+            commands.txt file. It returns an
+            <a
+              href="https://javascript.info/async-iterators-generators#:~:text=Asynchronous%20iteration%20allow%20us%20to,a%20real%2Dlife%20use%20case."
+              target="_blank"
+              >Async Iterator</a
+            >
+            assigned to the constant variable <strong>watcher</strong>. We
+            iterate over this Async Iterator using the
+            <strong>await for...of</strong> loop to extract events.
           </p>
 
           <h1 id="commandfile-on">commandFileHandler.on() Method.</h1>
           <p>
-            Since the returned value stored in the commandFileHandler variable
-            inherits from the FileHandle class, we utilize event handlers like
-            .on() and .emit().
+            Since the returned value stored in the
+            <strong>commandFileHandler</strong> variable inherits from the
+            FileHandle class, we utilize event handlers like
+            <strong>.on()</strong> and <strong>.emit()</strong>.
           </p>
           <p>
-            Therefore, we will call commandFileHandler.on() and pass in the
-            change event as the first parameter and a listener as an async
-            callback function for the 2nd parameter.
+            Therefore, we will call <strong>commandFileHandler.on()</strong> and
+            pass in the <strong>change</strong> event as the first parameter and
+            a listener as an async
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function"
+              target="_blank"
+              >callback</a
+            >
+            function for the 2nd parameter.
           </p>
           <h1 id="memory-management">Memory Management</h1>
           <p>
             On opening the commands.txt file, we must read its data into memory.
-            However, Node.js is poor at managing memory, and we must configure
-            it ourselves. By default, Node.js preserves over 60000 bits to store
-            a data set that requires only a few bits.
+            However, Node.js is poor at
+            <a
+              href="https://www.techtarget.com/whatis/definition/memory-management"
+              target="_blank"
+              >memory management</a
+            >, and we must configure it ourselves. By default, Node.js preserves
+            over 60000 bits to store a data set that requires only a few bits.
           </p>
           <p>
             A developer must explicitly define how much memory to use when
             storing the read data on opening the commands.txt file.
           </p>
           <p>
-            Therefore, we dynamically assign memory size to a buffer size
-            variable on opening the commands.txt file.
+            Therefore, we dynamically assign memory size to a
+            <a href="https://www.baeldung.com/cs/buffer" target="_blank"
+              >buffer</a
+            >
+            size variable on opening the commands.txt file.
           </p>
         </div>
         <div class="code-area">
@@ -462,21 +569,24 @@
           <p>
             This function takes one parameter, a file path. Then performs checks
             to see if the file already exists. If the file exists, the operating
-            system will through an error message `The file &gt;path&gt; already
-            exists.` If it does not exist, it will create the file.
+            system will through an error message
+            <strong>The file &gt;path&gt; already exists</strong>. If it does
+            not exist, it will create the file.
           </p>
           <p>
             We check if the file exists by opening the path in read-only mode
-            using the fs.open(path, ‘r’) method with the flag ‘r’.
+            using the <strong>fs.open(path, ‘r’)</strong> method with the flag
+            <strong>'r'</strong>.
           </p>
           <p>
             If the file does not exist, we create the file by opening the path
-            asynchronously in write mode using the fs.open(path, ‘w’) method
-            with the flag ‘w’.
+            asynchronously in write mode using the
+            <strong>fs.open(path, ‘w’)</strong> method with the flag
+            <strong>‘w’</strong>.
           </p>
           <p>
-            Whenever you make an open system call, do not forget to close it.
-            Use the code:
+            Whenever you make an <strong>open</strong> system call, do not
+            forget to <strong>close</strong> it. Use the code:
           </p>
           <div class="code-clip">
             <button class="button-copy">
@@ -486,10 +596,11 @@
             <pre>await fs.close();</pre>
           </div>
 
-          <h2 id="delete-file">deleteFile</h2>
+          <h2 id="delete-file">deleteFile()</h2>
           <p>
             This function definition has one parameter, a file path. In the try
-            block, we asynchronously remove the file using the fs.unlink(path)
+            block, we asynchronously remove the file using the
+            <strong>fs.unlink(path)</strong>
             method.
           </p>
           <p>
@@ -500,7 +611,8 @@
           <p>
             The renameFile function takes two parameters, an old file path, and
             a new file path. The new file path replaces the old one if it
-            exists. We use the fs.rename(oldPath, newPath) method.
+            exists. We use the
+            <strong>fs.rename(oldPath, newPath)</strong> method.
           </p>
           <p>
             If the file does not exist, the operating system will through an
@@ -508,7 +620,8 @@
           </p>
           <h2 id="add-to-file">addToFile()</h2>
           <p>
-            The addToFile function takes two parameters, path and content
+            The addToFile function takes two parameters,
+            <strong>path</strong> and <strong>content</strong>
             parameters. The content parameter takes the data the user enters and
             adds it to the file path. If the file does not exist, the operating
             system will create one and append the content.
@@ -521,13 +634,29 @@
           <h2 id="exporting-module-functions">exporting module functions</h2>
           <p>
             We need all these modules in the app.js file. So, we use the
-            destructuring assignment to export all these functions.
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"
+              target="_blank"
+              >destructuring assignment</a
+            >
+            to export all these functions.
           </p>
           <h1 id="additional-resources">Additional resources.</h1>
-          <p>Node.js documentation</p>
-          <p>Mozilla Developer Network</p>
-          <p>W3School</p>
-          <p>Geek For Geeks</p>
+          <p>
+            <a href="https://nodejs.org/en/docs" target="_blank"
+              >Node.js documentation</a
+            >
+            <br />
+            <a href="https://developer.mozilla.org/en-US/" target="_blank"
+              >Mozilla Developer Network</a
+            >
+            <br />
+            <a href="https://www.w3schools.com/" target="_blank">W3School</a>
+            <br />
+            <a href="https://www.geeksforgeeks.org/" target="_blank"
+              >Geek For Geeks</a
+            >
+          </p>
         </div>
 
         <div class="code-area">
