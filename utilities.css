@@ -409,7 +409,11 @@ footer p > span {
   }
 
   .resources-links .resources .resource-copy {
-    height: 100%;
+    display: grid;
     padding: 2rem;
+  }
+  .resources-links .resources .resource-copy > a {
+    width: 70%;
+    margin-bottom: 1rem;
   }
 }
