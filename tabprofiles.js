@@ -4,7 +4,7 @@
   let trackerItem = document.querySelector("main .resource-tracker");
 
   tabButtons[0].addEventListener("click", () => {
-    trackerItem.style.left = `${0*33}`;
+    trackerItem.style.left = `${0 * 33}`;
     // Conditions for toggling button one
     tabButtons[0].classList.add("active");
     tabButtons[1].classList.remove("active");
